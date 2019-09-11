@@ -46,6 +46,7 @@ All templates minimally have the same base skeleton as described below.
     |   ├── handlers
     |   ├── middlewares
     |   |   ├── errorHandler.js
+    |   |   ├── normalizeRequest.js
     |   |   └── responseHandler.js
     |   ├── repositories
     |   └── config.js
@@ -189,16 +190,20 @@ Middlewares should be written as a handler in the `src/app/handlers/` directory.
 
 ### Available Middlewares
 
-This template contains 2 middlewares to handle API response.
+This template contains 3 middlewares.
+
+**`normalizeHandler.js`**  
+This middleware will normalize query string parameters and/or json body in the request into a common `event.input`. This middleware executes *before* the handler is called.
 
 **`responseHandler.js`**  
-This middleware will be executed whenever a successful response is expected to be returned. This middleware executes *before* the response is retured.
+This middleware will be executed whenever a successful response is expected to be returned. This middleware executes *after* the request is processed and *before* the response is returned.
 
 **`errorHandler.js`**  
-This middleware will be executed whenever an error response is expected to be returned. This middleware executes *before* the response is retured.
+This middleware will be executed whenever an error response is expected to be returned. This middleware executes *after* the request is processed and  *before* the response is returned.
 
 ```js
 import middy from "middy";
+import normalizeRequest from "Middlewares/normalizeRequest";
 import responseHandler from "Middlewares/responseHandler";
 import errorHandler from "Middlewares/errorHandler";
 
@@ -209,7 +214,8 @@ const originalHandler = async () => {
 export const handler = middy(originalHandler);
 
 handler
-  .use(responseHandler());
+  .use(normalizeRequest())
+  .use(responseHandler())
   .use(errorHandler());
 ```
 Refer to `src/app/handlers/services/ping.js` for usage.
