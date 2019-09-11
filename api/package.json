@@ -1,0 +1,39 @@
+{
+  "name": "my-new-api-microservice",
+  "version": "1.0.0",
+  "description": "Serverless microservice api template",
+  "scripts": {
+    "server": "sls offline start --stage local",
+    "deploy-dev": "./scripts/serverless.sh -s dev",
+    "deploy-test": "./scripts/serverless.sh -s test",
+    "deploy-prod": "./scripts/serverless.sh -s prod",
+    "invoke-dev": "./scripts/serverless.sh -s dev -t invoke",
+    "invoke-test": "./scripts/serverless.sh -s test -t invoke",
+    "invoke-prod": "./scripts/serverless.sh -s prod -t invoke",
+    "logs-dev": "./scripts/serverless.sh -s dev -t logs",
+    "logs-test": "./scripts/serverless.sh -s test -t logs",
+    "logs-prod": "./scripts/serverless.sh -s prod -t logs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "middy": "^0.29.0",
+    "serverless-api-compression": "^1.0.1"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.526.0",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-plugin-syntax-object-rest-spread": "^6.13.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "serverless-offline": "^5.10.1",
+    "serverless-plugin-log-retention": "^2.0.0",
+    "serverless-plugin-optimize": "^4.1.0-rc.1",
+    "serverless-webpack": "^5.3.1",
+    "source-map": "^0.7.3",
+    "webpack": "^4.35.2"
+  },
+  "author": "The serverless webpack authors (https://github.com/elastic-coders/serverless-webpack)",
+  "license": "MIT"
+}

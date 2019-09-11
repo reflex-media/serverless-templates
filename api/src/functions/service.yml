@@ -1,0 +1,23 @@
+servicePing:
+  handler: ${self:custom.path.app}/handlers/services/ping.handler
+  description: Service online availability test
+  timeout: 1
+  reservedConcurrency: 3
+  events:
+  - http:
+      path: services/ping
+      method: get
+      private: false
+      cors: ${self:custom.http.cors}
+
+servicePingAuth:
+  handler: ${self:custom.path.app}/handlers/services/ping.handler
+  description: Service online availability test with authentication
+  timeout: 1
+  reservedConcurrency: 3
+  events:
+  - http:
+      path: services/ping/auth
+      method: get
+      private: true
+      cors: ${self:custom.http.cors}
