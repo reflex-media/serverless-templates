@@ -5,6 +5,8 @@ Bootstrap your next API serverless project.
 
 ## Quick Start
 
+**Prerequisites**: Install Serverless Framework with: `npm install -g serverless`.
+
 Create Serverless project:
 ```
 $ sls create --template-url https://github.com/mosufy/serverless-templates/tree/master/api --path my-service
