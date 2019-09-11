@@ -12,7 +12,7 @@ Through the years I have created several serverless projects and microservices a
 
 Create Serverless project
 ```bash
-$ sls create --template-url https://github.com/mosufy/serverless-templates/tree/master/api --path my-service
+$ sls create --template-url https://github.com/mosufy/serverless-templates/tree/master/api-light --path my-service
 $ cd my-service
 ```
 
@@ -118,4 +118,4 @@ $ yarn logs-dev -f ServicePing
 ```
 
 ## Available Templates
-- [API](https://github.com/mosufy/serverless-templates/tree/master/api)
+- [api-light](https://github.com/mosufy/serverless-templates/tree/master/api-light)

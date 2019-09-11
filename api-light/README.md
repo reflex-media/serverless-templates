@@ -1,5 +1,5 @@
-# API Serverless Template
-Bootstrap your next API serverless project.
+# Lightweight API Serverless Template
+Bootstrap your next API serverless project with the most basic resources. Recommended for quick, single function or endpoint.
 
 **Included Resources:**
 - API Gateway
@@ -13,7 +13,7 @@ Bootstrap your next API serverless project.
 
 Create Serverless project
 ```bash
-$ sls create --template-url https://github.com/mosufy/serverless-templates/tree/master/api --path my-service
+$ sls create --template-url https://github.com/mosufy/serverless-templates/tree/master/api-light --path my-service
 $ cd my-service
 ```
 

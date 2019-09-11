@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Serverless microservice api template",
   "scripts": {
+    "start": "sls offline start --stage local",
     "server": "sls offline start --stage local",
     "deploy-dev": "./scripts/serverless.sh -s dev",
     "deploy-test": "./scripts/serverless.sh -s test",
