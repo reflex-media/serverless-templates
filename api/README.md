@@ -1,144 +1,145 @@
 # API Serverless Template
 Bootstrap your next API serverless project.
 
+**Included Resources:**
+- API Gateway
+- Lambda
+
 **NOTE:** This is not an introduction to the Serverless Framework. You would already need to know how Serverless Framework works prior to using of this template.
 
 ## Quick Start
 
 **Prerequisites**: Install Serverless Framework with: `npm install -g serverless`.
 
-Create Serverless project:
-```
+Create Serverless project
+```bash
 $ sls create --template-url https://github.com/mosufy/serverless-templates/tree/master/api --path my-service
-
 $ cd my-service
 ```
 
-Install dependencies:
-```
+Install dependencies
+```bash
 $ yarn install
 ```
 
-Run on local:
-```
-$ yarn server
+Start local
+```bash
+$ yarn start
 ```
 
 Access local url via browser or Postman (recommended): http://localhost:8181/services/ping
 
 ## Directory Structure
+All templates minimally have the same base skeleton as described below.
+
 ```
-- root
-  - environments
-  - scripts
-  - src
-    - app
-      - constants
-      - errors
-      - handlers
-        - services
-      - middlewares
-      - repositories
-    - functions
-    - resources
-    - utils
+├── environments
+|   ├── dev.yml
+|   ├── local.yml
+|   ├── prod.yml
+|   └── test.yml
+├── scripts
+└── src
+    ├── app
+    |   ├── constants
+    |   ├── errors
+    |   ├── handlers
+    |   ├── middlewares
+    |   |   ├── errorHandler.js
+    |   |   └── responseHandler.js
+    |   ├── repositories
+    |   └── config.js
+    ├── functions
+    ├── resources
+    └── utils
 ```
 
-**`environments`**  
-All env files (env-specific configurations) will be stored here.
+**environments/**  
+Contains environment values stored in yaml format. Used specifically during the build process.
 
-**`scripts`**  
-Deployment/build specific scripts.
+**scripts/**  
+Contains deployment/build specific scripts.
 
-**`src`**  
+**src/**  
 Main source code for your project.
 
-**`src/app`**  
-Application specific code should only be stored here.
+**src/app/**  
+Contains application specific code.
 
-**`src/app/constants`**  
-All consants used in your Application should be declared here.
+**src/app/constants/**  
+Application constants.
 
-**`src/app/errors`**  
-All errors/exceptions used in your Application should be declared here.
+**src/app/errors/**  
+Application error classes.
 
-**`src/app/handlers`**  
-Entry point for all requests.
+**src/app/handlers/**  
+Entry point for all events.
 
-**`src/app/middlewares`**  
-All middlewares used in your Application should be declared here. See [Middlewares](#middlewares) for more information.
+**src/app/middlewares/**  
+Request middlewares. See [Middlewares](#middlewares) for more information.
 
-**`src/app/repositories`**  
-Business logic (application code) should be added here.
+**src/app/repositories/**  
+Contains application business logic.
 
-**`src/functions`**  
+**src/app/config.js**  
+Configuration used within your application.
+
+**src/functions/**  
 Serverless functions should be configured here.
 
-**`src/resources`**  
+**src/resources/**  
 Serverless resources should be configured here.
 
-**`src/utils`**  
+**src/utils/**  
 Additional Serverless files where required.
 
 ## Available Commands
 
-**Run on local:**
-```
-$ yarn server
+**Start local**
+```bash
+$ yarn start
 ```
 
-**Deploy to AWS:**
-
-*deploy dev*
-```
+**Deploy**
+```bash
+# Deploy dev environment
 $ yarn deploy-dev
-```
 
-*deploy test*
-```
+# Deploy test environment
 $ yarn deploy-test
-```
 
-*deploy prod*
-```
+# Deploy prod environment
 $ yarn deploy-prod
 ```
 
-**Deploy single function to AWS:**
-```
+**Deploy single function**
+```bash
 $ yarn deploy-dev -f {function_name}
-```
-*example*
-```
+
+# Example
 $ yarn deploy-dev -f ServicePing
 ```
 
 **Invoke single function**
-```
+```bash
 $ yarn invoke-dev -f {function_name}
-```
-*example*
-```
+
+# Example
 $ yarn invoke-dev -f ServicePing
 ```
 
 **Tail log of a single function**
-```
+```bash
 $ yarn logs-dev -f {function_name}
-```
-*example*
-```
+
+# Example
 $ yarn logs-dev -f ServicePing
 ```
 
-## Included Services
-- API Gateway
-- Lambda
+## Environment Configurations
+All environment configurations are available in the `environments/` directory, written in yaml format.
 
-## Configurations
-All configurations are available in the `environments/` directory.
-
-```
+```yaml
 # Declare the environment
 APP_ENV: dev
 
@@ -166,28 +167,34 @@ AWS_APIGATEWAY_SECRET_KEY:
 
 ## Available Endpoints
 
-`/services/ping`  
+**`/services/ping`**  
 Send a "liveness-check" request to your endpoint.
 
-`/services/ping/auth`  
+**`/services/ping/auth`**  
 Send a "liveness-check" request with a required authorization.  
 **Note**: Set `x-api-key` in your request header for a valid request.
 
-`/services/ping?sample-error=message`  
-Returns the request with an "error" response type.
+**`/services/ping?sample-error=message`**  
+Returns the request with an "error message" response type.
 
-`/services/ping?sample-error=exception`  
-Returns the request with an "exception" response type.
+**`/services/ping?sample-error=exception`**  
+Returns the request with an "error class" response type.
 
 ## Middlewares
-Middlewares can be executed before or after a request. This will be useful for cases where an action needs to be done prior to the rest of the business logic, or when you needed to do something else prior to the sending of the response.
+Middlewares can be executed before or after a request. This will be useful for cases where an action needs to be done prior to the rest of the business logic, or when you needed to execute an action prior to the sending of the response.
 
-Middlewares requires Middy to work.
+Middlewares make use of [Middy npm](https://www.npmjs.com/package/middy) to work.
 
-**`responseHandler`**  
+Middlewares should be written as a handler in the `src/app/handlers/` directory.
+
+### Available Middlewares
+
+This template contains 2 middlewares to handle API response.
+
+**`responseHandler.js`**  
 This middleware will be executed whenever a successful response is expected to be returned. This middleware executes *before* the response is retured.
 
-**`errorHandler`**  
+**`errorHandler.js`**  
 This middleware will be executed whenever an error response is expected to be returned. This middleware executes *before* the response is retured.
 
 ```js
@@ -207,10 +214,14 @@ handler
 ```
 Refer to `src/app/handlers/services/ping.js` for usage.
 
+You may also import other ready-made middlewares from the [Middy repository](https://www.npmjs.com/package/middy#available-middlewares).
+
+### Custom Middlewares
+
+You can write your own middleware with [Middy](https://www.npmjs.com/package/middy#writing-a-middleware).
+
 ## Error Handling
 
-It is recommended to always throw an Error instead of returning an error as a normal response. You may create your own Error Class within the `src/app/errors/` directory.
+It is recommended to always throw an Error as an exception instead of returning just and error message. You may create your own Error Class within the `src/app/errors/` directory.
 
 Refer to the sample `ValidationError.js` class provided.
-
-Refer to `src/app/errors/ValidationError.js` for usage.

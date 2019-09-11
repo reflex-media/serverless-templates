@@ -1,127 +1,119 @@
 # Serverless Templates
 This repository contains a set of serverless templates to bootstrap your serverless projects.
 
-**NOTE:** This is not an introduction to the Serverless Framework. You would already need to know how Serverless Framework works prior to using any of the templates.
+**NOTE:** This is not an introduction to the Serverless Framework. You would need to know how Serverless Framework works prior to using any of these templates.
 
 ## Motivation
-Through the years I have created several serverless projects/microservices and come to realise that most of the base requirements are the same. With each project, I tend to copy-and-paste them and just to kickstart/bootstrap a new project.
-
-I came to realise that Serverless supports Templates and thus, this repository is born.
+Through the years I have created several serverless projects and microservices and come to realise that most of the basic requirements are the same. As Serverless supports Templates, this repository is born.
 
 ## Quick Start
 
 **Prerequisites**: Install Serverless Framework with: `npm install -g serverless`.
 
-Create Serverless project:
-```
+Create Serverless project
+```bash
 $ sls create --template-url https://github.com/mosufy/serverless-templates/tree/master/api --path my-service
-
 $ cd my-service
 ```
 
-Install dependencies:
-```
+Install dependencies
+```bash
 $ yarn install
 ```
 
-Run on local:
-```
-$ yarn server
+Start local
+```bash
+$ yarn start
 ```
 
 Access local url via browser or Postman (recommended): http://localhost:8181/services/ping
 
 ## Directory Structure
-All templates have minimally the same basic folder structure as described below.
+All templates minimally have the same base skeleton as described below.
 
 ```
-- root
-  - environments
-  - scripts
-  - src
-    - app
-      - handlers
-      - repositories
-    - functions
-    - resources
-    - utils
+├── environments
+|   ├── dev.yml
+|   ├── local.yml
+|   ├── prod.yml
+|   └── test.yml
+├── scripts
+└── src
+    ├── app
+    |   ├── handlers
+    |   └── config.js
+    ├── functions
+    ├── resources
+    └── utils
 ```
 
-**`environments`**  
-All env files (env-specific configurations) will be stored here.
+**environments/**  
+Contains environment values stored in yaml format. Used specifically during the build process.
 
-**`scripts`**  
-Deployment/build specific scripts.
+**scripts/**  
+Contains deployment/build specific scripts.
 
-**`src`**  
+**src/**  
 Main source code for your project.
 
-**`src/app`**  
-Application specific code should only be stored here.
+**src/app/**  
+Contains application specific code.
 
-**`src/app/handers`**  
-Entry point for all requests.
+**src/app/handlers/**  
+Entry point for all events.
 
-**`src/app/repositories`**  
-Business logic (application code) should be added here.
+**src/app/config.js**  
+Configuration used within your application.
 
-**`src/functions`**  
+**src/functions/**  
 Serverless functions should be configured here.
 
-**`src/resources`**  
+**src/resources/**  
 Serverless resources should be configured here.
 
-**`src/utils`**  
+**src/utils/**  
 Additional Serverless files where required.
 
 ## Available Commands
 
-**Run on local:**
-```
-$ yarn server
+**Start local**
+```bash
+$ yarn start
 ```
 
-**Deploy to AWS:**
-
-*deploy dev*
-```
+**Deploy**
+```bash
+# Deploy dev environment
 $ yarn deploy-dev
-```
 
-*deploy test*
-```
+# Deploy test environment
 $ yarn deploy-test
-```
 
-*deploy prod*
-```
+# Deploy prod environment
 $ yarn deploy-prod
 ```
 
-**Deploy single function to AWS:**
-```
+**Deploy single function**
+```bash
 $ yarn deploy-dev -f {function_name}
-```
-*example*
-```
+
+# Example
 $ yarn deploy-dev -f ServicePing
 ```
 
 **Invoke single function**
-```
+```bash
 $ yarn invoke-dev -f {function_name}
-```
-*example*
-```
+
+# Example
 $ yarn invoke-dev -f ServicePing
 ```
 
 **Tail log of a single function**
-```
+```bash
 $ yarn logs-dev -f {function_name}
-```
-*example*
-```
+
+# Example
 $ yarn logs-dev -f ServicePing
 ```
 
