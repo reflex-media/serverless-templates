@@ -1,9 +1,9 @@
 import middy from "middy";
+
 import normalizeRequest from "Middlewares/normalizeRequest";
 import errorHandler from "Middlewares/errorHandler";
 import responseHandler from "Middlewares/responseHandler";
-
-import ValidationError from "../../errors/ValidationError";
+import ValidationError from "Errors/ValidationError";
 
 const originalHandler = async event => {
   return await ping(event);

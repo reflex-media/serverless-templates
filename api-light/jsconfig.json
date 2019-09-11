@@ -4,7 +4,8 @@
         "allowSyntheticDefaultImports": false,
         "baseUrl": "./",
         "paths": {
-            "Middlewares/*": ["src/app/middlewares/*"]
+            "Middlewares/*": ["src/app/middlewares/*"],
+            "Errors/*": ["src/app/errors/*"]
         }
     },
     "exclude": ["node_modules", "dist", "scripts", "environments"]
