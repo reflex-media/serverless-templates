@@ -1,7 +1,7 @@
-import middy from "src/app/handlers/services/middy";
+import middy from "middy";
 
-import errorHandler from "src/app/handlers/services/Middlewares/errorHandler";
-import responseHandler from "src/app/handlers/services/Middlewares/responseHandler";
+import errorHandler from "Middlewares/errorHandler";
+import responseHandler from "Middlewares/responseHandler";
 import ValidationError from "../../errors/ValidationError";
 
 const originalHandler = async (event) => {
