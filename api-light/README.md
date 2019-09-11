@@ -230,4 +230,20 @@ You can write your own middleware with [Middy](https://www.npmjs.com/package/mid
 
 It is recommended to always throw an Error as an exception instead of returning just and error message. You may create your own Error Class within the `src/app/errors/` directory.
 
-Refer to the sample `ValidationError.js` class provided.
+```js
+import ValidationError from "Errors/ValidationError";
+
+const someFunction = () => {
+  throw new ValidationError(
+    "Content type defined as JSON but an invalid JSON was provided",
+    40001002,
+    400
+  );
+}
+```
+
+Refer to the sample `src/app/handers/services/ping.js` for usage.
+
+### Custom Error Classes
+
+You can define your own Error Classes as required. Refer to the existing `src/app/errors/ValidationError.js` class.

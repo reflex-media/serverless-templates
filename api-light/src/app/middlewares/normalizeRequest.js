@@ -1,4 +1,4 @@
-import ValidationError from "../errors/ValidationError";
+import ValidationError from "Errors/ValidationError";
 
 /**
  * Normalizes handler.event.body and handler.event.queryStringParameters
