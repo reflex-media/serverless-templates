@@ -39,20 +39,21 @@ All templates minimally have the same base skeleton as described below.
 |   ├── prod.yml
 |   └── test.yml
 ├── scripts
-└── src
-    ├── app
-    |   ├── constants
-    |   ├── errors
-    |   ├── handlers
-    |   ├── middlewares
-    |   |   ├── errorHandler.js
-    |   |   ├── normalizeRequest.js
-    |   |   └── responseHandler.js
-    |   ├── repositories
-    |   └── config.js
-    ├── functions
-    ├── resources
-    └── utils
+├── src
+|   ├── app
+|   |   ├── constants
+|   |   ├── errors
+|   |   ├── handlers
+|   |   ├── middlewares
+|   |   |   ├── errorHandler.js
+|   |   |   ├── normalizeRequest.js
+|   |   |   └── responseHandler.js
+|   |   ├── repositories
+|   |   └── config.js
+|   ├── functions
+|   ├── resources
+|   └── utils
+└── test
 ```
 
 **environments/**  
@@ -93,6 +94,9 @@ Serverless resources should be configured here.
 
 **src/utils/**  
 Additional Serverless files where required.
+
+**test/**  
+All test files to be written here.
 
 ## Available Commands
 
@@ -247,3 +251,19 @@ Refer to the sample `src/app/repositories/services/pingServiceRepository.js` for
 ### Custom Error Classes
 
 You can define your own Error Classes as required. Refer to the existing `src/app/errors/ValidationError.js` class.
+
+### Unit Test
+This template uses Mocha, Chai, and NYC test frameworks for unit testing.
+
+All test files exists in the `test` directory.
+
+**Run test**
+```bash
+$ yarn test
+```
+
+**Run code coverage report**
+```bash
+$ yarn coverage
+```
+View the generated html report in `coverage/index.html`.
