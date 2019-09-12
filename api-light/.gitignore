@@ -7,3 +7,10 @@ jspm_packages
 
 # Webpack directories
 .webpack
+
+# nyc coverage report
+coverage
+.nyc_output
+
+# yarn error log
+yarn-error.log
