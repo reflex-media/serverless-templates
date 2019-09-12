@@ -105,23 +105,19 @@ All test files to be written here.
 $ yarn start
 ```
 
-**Deploy**
+**Deploy application**
 ```bash
-# Deploy dev environment
-$ yarn deploy-dev
+$ yarn deploy -s {environment}
 
-# Deploy test environment
-$ yarn deploy-test
-
-# Deploy prod environment
-$ yarn deploy-prod
+# Example deploy to dev environment
+$ yarn deploy -s dev
 ```
 
 **Deploy single function**
 ```bash
 $ yarn deploy-dev -f {function_name}
 
-# Example
+# Example deploy ServicePing function
 $ yarn deploy-dev -f ServicePing
 ```
 
@@ -129,7 +125,7 @@ $ yarn deploy-dev -f ServicePing
 ```bash
 $ yarn invoke-dev -f {function_name}
 
-# Example
+# Example invoke ServicePing function
 $ yarn invoke-dev -f ServicePing
 ```
 
@@ -137,7 +133,7 @@ $ yarn invoke-dev -f ServicePing
 ```bash
 $ yarn logs-dev -f {function_name}
 
-# Example
+# Example tail log of ServicePing function
 $ yarn logs-dev -f ServicePing
 ```
 

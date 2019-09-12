@@ -5,15 +5,9 @@
   "scripts": {
     "start": "sls offline start --stage local",
     "server": "sls offline start --stage local",
-    "deploy-dev": "./scripts/serverless.sh -s dev",
-    "deploy-test": "./scripts/serverless.sh -s test",
-    "deploy-prod": "./scripts/serverless.sh -s prod",
-    "invoke-dev": "./scripts/serverless.sh -s dev -t invoke",
-    "invoke-test": "./scripts/serverless.sh -s test -t invoke",
-    "invoke-prod": "./scripts/serverless.sh -s prod -t invoke",
-    "logs-dev": "./scripts/serverless.sh -s dev -t logs",
-    "logs-test": "./scripts/serverless.sh -s test -t logs",
-    "logs-prod": "./scripts/serverless.sh -s prod -t logs",
+    "deploy": "./scripts/serverless.sh",
+    "invoke": "./scripts/serverless.sh -t invoke",
+    "logs": "./scripts/serverless.sh -t logs",
     "test": "NODE_PATH=./src/app ./node_modules/.bin/mocha --require babel-register --require babel-polyfill test/**/*.js",
     "coverage": "nyc --reporter=lcov --reporter=html --reporter=text-summary npm run test"
   },
