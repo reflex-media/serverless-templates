@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+  - 10
+  - node
+install:
+  - cd api-light && yarn install cd..
+script:
+  - cd api-light && yarn test
