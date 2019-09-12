@@ -3,7 +3,7 @@ import config from '../config';
 /**
  * Formats response for successful responses
  */
-export default (opts) => {
+export default /* istanbul ignore next */ opts => {
   const defaults = {
     statusCode: 200,
   };
@@ -12,21 +12,24 @@ export default (opts) => {
 
   return {
     after: (handler, next) => {
-      handler.response = {
-        headers: {
-          'Access-Control-Allow-Credentials': true,
-          'Access-Control-Allow-Origin': '*',
-          'Cache-Control': 'no-cache',
-        },
-        statusCode: options.statusCode,
-        body: JSON.stringify({
-          status: 'success',
-          data: handler.response,
-          _meta: config.app.env !== 'prod' ? handler.event : {},
-        }),
-      };
-
+      handler.response = responseHandler(handler.response, options.statusCode, handler.event);
       next();
     },
   };
 };
+
+export const responseHandlerResponse = (response, statusCode = 200, event = {}) => {
+  return {
+    headers: {
+      "Access-Control-Allow-Credentials": true,
+      "Access-Control-Allow-Origin": "*",
+      "Cache-Control": "no-cache",
+    },
+    statusCode: statusCode,
+    body: JSON.stringify({
+      status: "success",
+      data: response,
+      _meta: config.app.debug ? event : {},
+    }),
+  };
+}
