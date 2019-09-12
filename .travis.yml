@@ -3,6 +3,6 @@ node_js:
   - 10
   - node
 install:
-  - cd api-light && yarn add cd..
+  - cd api-light && yarn install
 script:
-  - cd api-light && yarn test
+  - yarn test
