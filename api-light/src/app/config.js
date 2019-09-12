@@ -1,7 +1,7 @@
 const config = {
   app: {
-    env: process.env.APP_ENV,
-    debug: process.env.APP_DEBUG,
+    env: process.env.APP_ENV || "dev",
+    debug: process.env.APP_DEBUG || true,
   },
 };
 
