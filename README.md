@@ -4,7 +4,9 @@ This repository contains a set of serverless templates to bootstrap your serverl
 **NOTE:** This is not an introduction to the Serverless Framework. You would need to know how Serverless Framework works prior to using any of these templates.
 
 ## Motivation
-Through the years I have created several serverless projects and microservices and come to realise that most of the basic requirements are the same. As Serverless supports Templates, this repository is born.
+Through the years we have created several serverless projects and microservices and come to realise that most of the basic requirements are the same. As Serverless Framework supports Templates, this repository is born.
+
+Refer to the list of [available templates](#available-templates) to learn more of what each template provides.
 
 ## Quick Start
 

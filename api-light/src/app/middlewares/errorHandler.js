@@ -1,5 +1,5 @@
 import config from "../config";
-import { UNKNOWN_ERROR } from "../constants/errorCodes";
+import { UNKNOWN_ERROR } from "Constants/errorCodes";
 
 /**
  * Formats response for error responses

@@ -5,7 +5,9 @@
         "baseUrl": "./",
         "paths": {
             "Middlewares/*": ["src/app/middlewares/*"],
-            "Errors/*": ["src/app/errors/*"]
+            "Errors/*": ["src/app/errors/*"],
+            "Constants/*": ["src/app/constants/*"],
+            "Repositories/*": ["src/app/repositories/*"]
         }
     },
     "exclude": ["node_modules", "dist", "scripts", "environments"]

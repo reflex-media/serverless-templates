@@ -242,7 +242,7 @@ const someFunction = () => {
 }
 ```
 
-Refer to the sample `src/app/handers/services/ping.js` for usage.
+Refer to the sample `src/app/repositories/services/pingServiceRepository.js` for usage.
 
 ### Custom Error Classes
 

@@ -33,6 +33,8 @@ module.exports = {
     alias: {
       Middlewares: path.resolve(__dirname, 'src/app/middlewares/'),
       Errors: path.resolve(__dirname, 'src/app/errors/'),
+      Constants: path.resolve(__dirname, 'src/app/constants/'),
+      Repositories: path.resolve(__dirname, 'src/app/repositories/'),
     }
   }
 };
