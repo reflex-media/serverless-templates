@@ -115,26 +115,26 @@ $ yarn deploy -s dev
 
 **Deploy single function**
 ```bash
-$ yarn deploy-dev -f {function_name}
+$ yarn deploy -s {environment} -f {function_name}
 
 # Example deploy ServicePing function
-$ yarn deploy-dev -f ServicePing
+$ yarn deploy -s dev -f ServicePing
 ```
 
 **Invoke single function**
 ```bash
-$ yarn invoke-dev -f {function_name}
+$ yarn invoke -s {environment} -f {function_name}
 
 # Example invoke ServicePing function
-$ yarn invoke-dev -f ServicePing
+$ yarn invoke -s dev -f ServicePing
 ```
 
 **Tail log of a single function**
 ```bash
-$ yarn logs-dev -f {function_name}
+$ yarn logs -s {environment} -f {function_name}
 
 # Example tail log of ServicePing function
-$ yarn logs-dev -f ServicePing
+$ yarn logs -s dev -f ServicePing
 ```
 
 ## Environment Configurations
