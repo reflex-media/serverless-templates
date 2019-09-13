@@ -1,4 +1,8 @@
 {
-    "presets": ["babel-preset-env"],
-    "plugins": ["syntax-object-rest-spread", "babel-plugin-webpack-aliases"]
+    "presets": [
+        "@babel/preset-env"
+    ],
+    "plugins": [
+        "babel-plugin-webpack-aliases"
+    ]
 }

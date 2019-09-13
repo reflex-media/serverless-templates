@@ -12,7 +12,7 @@ export default /* istanbul ignore next */ opts => {
 
   return {
     after: (handler, next) => {
-      handler.response = responseHandler(handler.response, options.statusCode, handler.event);
+      handler.response = responseHandlerResponse(handler.response, options.statusCode, handler.event);
       next();
     },
   };

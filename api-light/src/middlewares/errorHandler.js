@@ -14,7 +14,7 @@ export default /* istanbul ignore next */ opts => {
   return {
     onError: (handler, next) => {
       if (typeof options.logger === "function") options.logger(handler.error);
-      handler.response = errorHandlerResponse(handler.error, config.app.debug, event);
+      handler.response = errorHandlerResponse(handler.error, handler.event);
       next();
     }
   };
