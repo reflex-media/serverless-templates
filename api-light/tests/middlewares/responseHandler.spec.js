@@ -1,34 +1,32 @@
 "use strict";
 
-import { expect } from "chai";
-
 import { responseHandlerResponse } from "Middlewares/responseHandler";
 
 describe("test responseHandler middleware", () => {
-  it("test default", async () => {
+  it("test default", () => {
     const data = responseHandlerResponse("Some message");
 
-    expect(data.headers["Access-Control-Allow-Credentials"]).to.equal(true);
-    expect(data.headers["Access-Control-Allow-Origin"]).to.equal("*");
-    expect(data.headers["Cache-Control"]).to.equal("no-cache");
+    expect(data.headers["Access-Control-Allow-Credentials"]).toBe(true);
+    expect(data.headers["Access-Control-Allow-Origin"]).toBe("*");
+    expect(data.headers["Cache-Control"]).toBe("no-cache");
 
-    expect(data.statusCode).to.equal(200);
+    expect(data.statusCode).toBe(200);
 
-    expect(data.body).to.be.a("String");
+    expect(typeof data.body).toBe("string");
 
     const dataBody = JSON.parse(data.body);
-    expect(dataBody).has.property("status", "success");
-    expect(dataBody).has.property("data", "Some message");
+    expect(dataBody).toHaveProperty("status", "success");
+    expect(dataBody).toHaveProperty("data", "Some message");
   });
 
-  it("test with status code and event", async () => {
+  it("test with status code and event", () => {
     const data = responseHandlerResponse("Some message", 201, { someEventKey: "someEventValue" });
 
-    expect(data.statusCode).to.equal(201);
+    expect(data.statusCode).toBe(201);
 
     const dataBody = JSON.parse(data.body);
-    expect(dataBody).has.property("status", "success");
-    expect(dataBody).has.property("data", "Some message");
-    expect(dataBody).to.have.deep.property("_meta", { someEventKey: "someEventValue" });
+    expect(dataBody).toHaveProperty("status", "success");
+    expect(dataBody).toHaveProperty("data", "Some message");
+    expect(dataBody).toHaveProperty("_meta", { someEventKey: "someEventValue" });
   });
 });

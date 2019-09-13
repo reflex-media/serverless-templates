@@ -1,83 +1,75 @@
 "use strict";
 
-import { expect } from "chai";
-
 import { UNKNOWN_ERROR, VALIDATION_ERROR, VALIDATION_ERROR_SAMPLE } from "Constants/errorCodes";
 import { errorHandlerResponse } from "Middlewares/errorHandler";
 import ValidationError from "Exceptions/ValidationError";
 
 describe("test errorHandler middleware", () => {
-  it("test with thrown Error", async () => {
+  it("test with thrown Error", () => {
     const data = errorHandlerResponse(new Error("Test validation error"));
 
-    expect(data.headers["Access-Control-Allow-Credentials"]).to.equal(true);
-    expect(data.headers["Access-Control-Allow-Origin"]).to.equal("*");
-    expect(data.headers["Cache-Control"]).to.equal("no-cache");
+    expect(data.headers["Access-Control-Allow-Credentials"]).toBe(true);
+    expect(data.headers["Access-Control-Allow-Origin"]).toBe("*");
+    expect(data.headers["Cache-Control"]).toBe("no-cache");
 
-    expect(data.statusCode).to.equal(500);
+    expect(data.statusCode).toBe(500);
 
-    expect(data.body).to.be.a("String");
+    expect(typeof data.body).toBe("string");
 
     const dataBody = JSON.parse(data.body);
-    expect(dataBody).has.property("status", "error");
-    expect(dataBody).has.property("data", null);
-    expect(dataBody).has.property("error");
-    expect(dataBody).to.have.nested.property("error.code", UNKNOWN_ERROR);
-    expect(dataBody).to.have.nested.property("error.message", "Error: Test validation error");
-    expect(dataBody).to.have.nested.property("error.details", "");
+    expect(dataBody).toHaveProperty("status", "error");
+    expect(dataBody).toHaveProperty("data", null);
+    expect(dataBody).toHaveProperty("error");
+    expect(dataBody).toHaveProperty("error.code", UNKNOWN_ERROR);
+    expect(dataBody).toHaveProperty("error.message", "Error: Test validation error");
+    expect(dataBody).toHaveProperty("error.details", "");
   });
 
-  it("test with thrown custom Error with default parameters", async () => {
+  it("test with thrown custom Error with default parameters", () => {
     const data = errorHandlerResponse(new ValidationError("Test validation error"));
     const dataBody = JSON.parse(data.body);
 
-    expect(data.statusCode).to.equal(400);
+    expect(data.statusCode).toBe(400);
 
-    expect(dataBody).to.have.nested.property("error.code", VALIDATION_ERROR);
-    expect(dataBody).to.have.nested.property(
-      "error.message",
-      "ValidationError: Test validation error"
-    );
-    expect(dataBody).to.have.nested.property("error.details", "");
+    expect(dataBody).toHaveProperty("error.code", VALIDATION_ERROR);
+    expect(dataBody).toHaveProperty("error.message", "ValidationError: Test validation error");
+    expect(dataBody).toHaveProperty("error.details", "");
   });
 
-  it("test with thrown custom Error with given parameters", async () => {
+  it("test with thrown custom Error with given parameters", () => {
     const data = errorHandlerResponse(
       new ValidationError("Test validation error", VALIDATION_ERROR_SAMPLE, 401, {
-        extraDataKey: "extraDataValue",
+        extraDataKey: "extraDataValue"
       })
     );
     const dataBody = JSON.parse(data.body);
 
-    expect(data.statusCode).to.equal(401);
+    expect(data.statusCode).toBe(401);
 
-    expect(dataBody).to.have.nested.property("error.code", VALIDATION_ERROR_SAMPLE);
-    expect(dataBody).to.have.nested.property(
-      "error.message",
-      "ValidationError: Test validation error"
-    );
-    expect(dataBody).to.have.deep.nested.property("error.details", {
-      extraDataKey: "extraDataValue",
+    expect(dataBody).toHaveProperty("error.code", VALIDATION_ERROR_SAMPLE);
+    expect(dataBody).toHaveProperty("error.message", "ValidationError: Test validation error");
+    expect(dataBody).toHaveProperty("error.details", {
+      extraDataKey: "extraDataValue"
     });
   });
 
-  it("test with error message", async () => {
+  it("test with error message", () => {
     const data = errorHandlerResponse("Test error message");
     const dataBody = JSON.parse(data.body);
 
-    expect(data.statusCode).to.equal(500);
+    expect(data.statusCode).toBe(500);
 
-    expect(dataBody).to.have.nested.property("error.code", UNKNOWN_ERROR);
-    expect(dataBody).to.have.nested.property("error.message", "Test error message");
-    expect(dataBody).to.have.nested.property("error.details", "");
+    expect(dataBody).toHaveProperty("error.code", UNKNOWN_ERROR);
+    expect(dataBody).toHaveProperty("error.message", "Test error message");
+    expect(dataBody).toHaveProperty("error.details", "");
   });
 
-  it("test with error message with event", async () => {
+  it("test with error message with event", () => {
     const data = errorHandlerResponse("Test error message", { someEventKey: "someEventValue" });
     const dataBody = JSON.parse(data.body);
 
-    expect(data.statusCode).to.equal(500);
+    expect(data.statusCode).toBe(500);
 
-    expect(dataBody).to.have.deep.property("_meta", { someEventKey: "someEventValue" });
+    expect(dataBody).toHaveProperty("_meta", { someEventKey: "someEventValue" });
   });
 });

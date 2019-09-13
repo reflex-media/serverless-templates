@@ -1,54 +1,58 @@
 "use strict";
 
-import { expect } from "chai";
-
 import { VALIDATION_ERROR_UNKNOWN_PARAMETER } from "Constants/errorCodes";
 import { normalize } from "Middlewares/normalizeRequest";
+import ValidationError from "Exceptions/ValidationError";
 
 describe("test normalizeRequest middleware", () => {
-  it("test without parameters", async () => {
+  it("test without parameters", () => {
     const data = normalize(undefined, null, null);
-    expect(data).to.equal(null);
+    expect(data).toBe(null);
   });
 
-  it("test with valid query string", async () => {
+  it("test with valid query string", () => {
     const data = normalize({}, { someKey: "someValue" }, null);
-    expect(data).to.eql({ someKey: "someValue" });
+    expect(data).toMatchObject({ someKey: "someValue" });
   });
 
-  it("test with valid body and content-type", async () => {
+  it("test with valid body and content-type", () => {
     const data = normalize(
       { "content-type": "application/json" },
       null,
       JSON.stringify({ someKey: "someValue" })
     );
 
-    expect(data).to.eql({ someKey: "someValue" });
+    expect(data).toMatchObject({ someKey: "someValue" });
   });
 
-  it("test with valid body and Content-Type", async () => {
+  it("test with valid body and Content-Type", () => {
     const data = normalize(
       { "Content-Type": "application/json" },
       null,
       JSON.stringify({ someKey: "someValue" })
     );
 
-    expect(data).to.eql({ someKey: "someValue" });
+    expect(data).toMatchObject({ someKey: "someValue" });
   });
 
-  it("test with valid query string and body and Content-Type", async () => {
+  it("test with valid query string and body and Content-Type", () => {
     const data = normalize(
       { "Content-Type": "application/json" },
       { someKeyQS: "someValueQS" },
       JSON.stringify({ someKeyBody: "someValueBody" })
     );
 
-    expect(data).to.eql({ someKeyQS: "someValueQS", someKeyBody: "someValueBody" });
+    expect(data).toMatchObject({ someKeyQS: "someValueQS", someKeyBody: "someValueBody" });
   });
 
-  it("test with invalid body and valid Content-Type", async () => {
-    expect(() => normalize({ "Content-Type": "application/json" }, null, { someKey: "someValue" }))
-      .to.throw(Error)
-      .and.has.property("code", VALIDATION_ERROR_UNKNOWN_PARAMETER);
+  it("test with invalid body and valid Content-Type", () => {
+    expect(() =>
+      normalize({ "Content-Type": "application/json" }, null, { someKey: "someValue" })
+    ).toThrow(
+      new ValidationError(
+        "Content type defined as JSON but an invalid JSON was provided",
+        VALIDATION_ERROR_UNKNOWN_PARAMETER
+      )
+    );
   });
 });
