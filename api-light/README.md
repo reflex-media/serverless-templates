@@ -1,4 +1,6 @@
 # Lightweight API Serverless Template
+[![Build Status](https://travis-ci.org/reflex-media/serverless-templates.svg?branch=master)](https://travis-ci.org/reflex-media/serverless-templates)
+
 Bootstrap your next API serverless project with the most basic resources. Recommended for quick, single function or endpoint.
 
 **Included Resources:**

@@ -33,4 +33,4 @@ Access local url via browser or Postman (recommended): http://localhost:8181/pin
 ## Available Templates
 See the available templates for more in-depth documentation and usage.
 
-- [api-light](https://github.com/mosufy/serverless-templates/tree/master/api-light)
+- [api-light](https://github.com/mosufy/serverless-templates/tree/master/api-light) 
