@@ -28,7 +28,7 @@ Start local
 $ yarn start
 ```
 
-Access local url via browser or Postman (recommended): http://localhost:8181/services/ping
+Access local url via browser or Postman (recommended): http://localhost:8181/ping
 
 ## Available Templates
 See the available templates for more in-depth documentation and usage.

@@ -27,75 +27,79 @@ Start local
 $ yarn start
 ```
 
-Access local url via browser or Postman (recommended): http://localhost:8181/services/ping
+Access local url via browser or Postman (recommended): http://localhost:8181/ping
 
 ## Directory Structure
 All templates minimally have the same base skeleton as described below.
 
 ```
-├── environments
-|   ├── dev.yml
-|   ├── local.yml
-|   ├── prod.yml
-|   └── test.yml
-├── scripts
-├── src
-|   ├── app
-|   |   ├── constants
-|   |   ├── errors
-|   |   ├── handlers
-|   |   ├── middlewares
-|   |   |   ├── errorHandler.js
-|   |   |   ├── normalizeRequest.js
-|   |   |   └── responseHandler.js
-|   |   ├── repositories
-|   |   └── config.js
+├── config
+|   ├── environments
+|   |   ├── dev.yml
+|   |   ├── local.yml
+|   |   ├── prod.yml
+|   |   └── test.yml
 |   ├── functions
 |   ├── resources
-|   └── utils
-└── test
+|   ├── utils
+├── scripts
+├── src
+|   ├── constants
+|   ├── core
+|   ├── exceptions
+|   ├── handlers
+|   ├── middlewares
+|   |   ├── errorHandler.js
+|   |   ├── normalizeRequest.js
+|   |   └── responseHandler.js
+|   ├── services
+|   └── config.js
+└── tests
 ```
 
-**environments/**  
-Contains environment values stored in yaml format. Used specifically during the build process.
+**config/**
+Contains serverless configurations.
 
-**scripts/**  
-Contains deployment/build specific scripts.
+**config/environments/**  
+Contains environment-specific values for the config.
 
-**src/**  
-Main source code for your project.
-
-**src/app/**  
-Contains application specific code.
-
-**src/app/constants/**  
-Application constants.
-
-**src/app/errors/**  
-Application error classes.
-
-**src/app/handlers/**  
-Entry point for all events.
-
-**src/app/middlewares/**  
-Request middlewares. See [Middlewares](#middlewares) for more information.
-
-**src/app/repositories/**  
-Contains application business logic.
-
-**src/app/config.js**  
-Configuration used within your application.
-
-**src/functions/**  
+**config/functions/**  
 Serverless functions should be configured here.
 
-**src/resources/**  
+**config/resources/**  
 Serverless resources should be configured here.
 
-**src/utils/**  
-Additional Serverless files where required.
+**config/utils/**  
+Additional Serverless configs where required.
 
-**test/**  
+**scripts/**  
+Contains Serverless deployment/build scripts.
+
+**src/**  
+Main source code for your application.
+
+**src/constants/**  
+Write application constants here.
+
+**src/core/**  
+Write application core business/application logic here.
+
+**src/exceptions/**  
+Application error classes.
+
+**src/handlers/**  
+Entry point for all events.
+
+**src/middlewares/**  
+Request middlewares. See [Middlewares](#middlewares) for more information.
+
+**src/services/**  
+3rd party services or modules.
+
+**src/config.js**  
+Configuration used within your application.
+
+**tests/**  
 All test files to be written here.
 
 ## Available Commands
@@ -168,17 +172,17 @@ AWS_APIGATEWAY_SECRET_KEY:
 
 ## Available Endpoints
 
-**`/services/ping`**  
+**`/ping`**  
 Send a "liveness-check" request to your endpoint.
 
-**`/services/ping/auth`**  
+**`/ping/auth`**  
 Send a "liveness-check" request with a required authorization.  
 **Note**: Set `x-api-key` in your request header for a valid request.
 
-**`/services/ping?sample-error=message`**  
+**`/ping?sample-error=message`**  
 Returns the request with an "error message" response type.
 
-**`/services/ping?sample-error=exception`**  
+**`/ping?sample-error=exception`**  
 Returns the request with an "error class" response type.
 
 ## Middlewares
@@ -218,7 +222,7 @@ handler
   .use(responseHandler())
   .use(errorHandler());
 ```
-Refer to `src/app/handlers/services/ping.js` for usage.
+Refer to `src/handlers/ping.js` for usage.
 
 You may also import other ready-made middlewares from the [Middy repository](https://www.npmjs.com/package/middy#available-middlewares).
 
@@ -228,7 +232,7 @@ You can write your own middleware with [Middy](https://www.npmjs.com/package/mid
 
 ## Error Handling
 
-It is recommended to always throw an Error as an exception instead of returning just and error message. You may create your own Error Class within the `src/app/errors/` directory.
+It is recommended to always throw an Error class as an exception instead of returning just and error message. You may create your own Error Class within the `src/exceptions/` directory.
 
 ```js
 import ValidationError from "Errors/ValidationError";
@@ -242,11 +246,11 @@ const someFunction = () => {
 }
 ```
 
-Refer to the sample `src/app/repositories/services/pingServiceRepository.js` for usage.
+Refer to the sample `src/core/ping.js` for usage.
 
 ### Custom Error Classes
 
-You can define your own Error Classes as required. Refer to the existing `src/app/errors/ValidationError.js` class.
+You can define your own Error Classes as required. Refer to the existing `src/exceptions/ValidationError.js` class.
 
 ### Unit Test
 This template uses Mocha, Chai, and NYC test frameworks for unit testing.
