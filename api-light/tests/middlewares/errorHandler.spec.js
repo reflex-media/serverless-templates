@@ -4,7 +4,7 @@ import { expect } from "chai";
 
 import { UNKNOWN_ERROR, VALIDATION_ERROR, VALIDATION_ERROR_SAMPLE } from "Constants/errorCodes";
 import { errorHandlerResponse } from "Middlewares/errorHandler";
-import ValidationError from "Errors/ValidationError";
+import ValidationError from "Exceptions/ValidationError";
 
 describe("test errorHandler middleware", () => {
   it("test with thrown Error", async () => {
@@ -77,7 +77,7 @@ describe("test errorHandler middleware", () => {
     const dataBody = JSON.parse(data.body);
 
     expect(data.statusCode).to.equal(500);
-    
+
     expect(dataBody).to.have.deep.property("_meta", { someEventKey: "someEventValue" });
   });
 });

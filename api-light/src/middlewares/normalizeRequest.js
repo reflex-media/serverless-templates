@@ -1,4 +1,4 @@
-import ValidationError from "Errors/ValidationError";
+import ValidationError from "Exceptions/ValidationError";
 import { VALIDATION_ERROR_UNKNOWN_PARAMETER } from "Constants/errorCodes";
 
 /**

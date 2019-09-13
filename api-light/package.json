@@ -8,7 +8,7 @@
     "deploy": "./scripts/serverless.sh",
     "invoke": "./scripts/serverless.sh -t invoke",
     "logs": "./scripts/serverless.sh -t logs",
-    "test": "./node_modules/.bin/mocha --require babel-register --require babel-polyfill test/*",
+    "test": "./node_modules/.bin/mocha --require babel-register --require babel-polyfill tests/*",
     "coverage": "nyc --reporter=html --reporter=text-summary npm run test"
   },
   "dependencies": {
@@ -41,11 +41,11 @@
   "nyc": {
     "all": true,
     "include": [
-      "src/app/**/*.js"
+      "src/**/*.js"
     ],
     "exclude": [
-      "src/app/config.js",
-      "src/app/handlers/**/*.js"
+      "src/config.js",
+      "src/handlers/**/*.js"
     ],
     "check-coverage": true,
     "branches": 80,

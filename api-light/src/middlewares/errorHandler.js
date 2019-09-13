@@ -1,4 +1,4 @@
-import config from "../config";
+import { app } from "../config";
 import { UNKNOWN_ERROR } from "Constants/errorCodes";
 
 /**
@@ -6,7 +6,7 @@ import { UNKNOWN_ERROR } from "Constants/errorCodes";
  */
 export default /* istanbul ignore next */ opts => {
   const defaults = {
-    logger: console.error,
+    logger: console.error
   };
 
   const options = { ...defaults, ...opts };
@@ -16,7 +16,7 @@ export default /* istanbul ignore next */ opts => {
       if (typeof options.logger === "function") options.logger(handler.error);
       handler.response = errorHandlerResponse(handler.error, config.app.debug, event);
       next();
-    },
+    }
   };
 };
 
@@ -25,7 +25,7 @@ export const errorHandlerResponse = (error, event = {}) => {
     headers: {
       "Access-Control-Allow-Credentials": true,
       "Access-Control-Allow-Origin": "*",
-      "Cache-Control": "no-cache",
+      "Cache-Control": "no-cache"
     },
     statusCode: error.statusCode || 500,
     body: JSON.stringify({
@@ -34,9 +34,9 @@ export const errorHandlerResponse = (error, event = {}) => {
       error: {
         code: error.code || UNKNOWN_ERROR,
         message: error.name ? `${error.name}: ${error.message}` : error.message || error,
-        details: error.extra || "",
+        details: error.extra || ""
       },
-      _meta: config.app.debug ? event : {},
-    }),
+      _meta: app.debug ? event : {}
+    })
   };
 };

@@ -1,4 +1,4 @@
-import config from '../config';
+import { app } from "../config";
 
 /**
  * Formats response for successful responses
@@ -29,7 +29,7 @@ export const responseHandlerResponse = (response, statusCode = 200, event = {}) 
     body: JSON.stringify({
       status: "success",
       data: response,
-      _meta: config.app.debug ? event : {},
+      _meta: app.debug ? event : {},
     }),
   };
 }

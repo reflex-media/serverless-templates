@@ -18,7 +18,7 @@ provider:
   stage: ${opt:stage, 'local'}
   profile: ${self:provider.environment.AWS_ACCOUNT_PROFILE}
   region: ${opt:region, self:provider.environment.AWS_ACCOUNT_REGION, 'us-west-1'}
-  environment: ${file(./environments/${self:provider.stage}.yml)}
+  environment: ${file(./config/environments/${self:provider.stage}.yml)}
   apiKeys:
     - usagePlan:
       - name: ${self:provider.stackName}-apiKey
@@ -32,9 +32,9 @@ provider:
 
 custom:
   path:
-    app: src/app
-    functions: src/functions
-    resources: src/resources
+    app: src
+    functions: config/functions
+    resources: config/resources
   serverless-offline:
     port: 8181
   webpack:
@@ -43,11 +43,11 @@ custom:
   contentEncoding:
     contentCompression: ${self:provider.environment.AWS_APIGATEWAY_COMPRESSION_MAX_BYTES, 100}
   http:
-    cors: ${file(src/utils/cors.yml)}
+    cors: ${file(config/utils/cors.yml)}
 
 # Add all the functions here
-functions:
-  - ${file(${self:custom.path.functions}/service.yml)}
+functions: 
+  - ${file(${self:custom.path.functions}/ping.yml)}
 
 # Add all the additional resources here
 resources:

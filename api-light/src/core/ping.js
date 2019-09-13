@@ -1,7 +1,7 @@
-import ValidationError from "Errors/ValidationError";
+import ValidationError from "Exceptions/ValidationError";
 import { VALIDATION_ERROR_SAMPLE, VALIDATION_ERROR_UNKNOWN_PARAMETER } from "Constants/errorCodes";
 
-const pingServiceRepository = input => {
+const ping = input => {
   return new Promise((resolve, reject) => {
     if (!input) return resolve("Pong");
 
@@ -17,4 +17,4 @@ const pingServiceRepository = input => {
   });
 };
 
-export default pingServiceRepository;
+export default ping;

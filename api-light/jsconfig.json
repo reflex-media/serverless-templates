@@ -4,10 +4,10 @@
         "allowSyntheticDefaultImports": false,
         "baseUrl": "./",
         "paths": {
-            "Middlewares/*": ["src/app/middlewares/*"],
-            "Errors/*": ["src/app/errors/*"],
-            "Constants/*": ["src/app/constants/*"],
-            "Repositories/*": ["src/app/repositories/*"]
+            "Middlewares/*": ["src/middlewares/*"],
+            "Exceptions/*": ["src/exceptions/*"],
+            "Constants/*": ["src/constants/*"],
+            "Core/*": ["src/core/*"]
         }
     },
     "exclude": ["node_modules", "dist", "scripts", "environments"]

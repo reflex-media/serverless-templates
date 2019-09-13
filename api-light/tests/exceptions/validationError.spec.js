@@ -2,7 +2,7 @@
 
 import { expect } from "chai";
 
-import ValidationError from "Errors/ValidationError";
+import ValidationError from "Exceptions/ValidationError";
 import { VALIDATION_ERROR, VALIDATION_ERROR_SAMPLE } from "Constants/errorCodes";
 
 describe("test ValidationError", () => {

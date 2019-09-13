@@ -4,10 +4,10 @@ import normalizeRequest from "Middlewares/normalizeRequest";
 import errorHandler from "Middlewares/errorHandler";
 import responseHandler from "Middlewares/responseHandler";
 
-import pingServiceRepository from "Repositories/services/pingServiceRepository";
+import ping from "Core/ping";
 
 const originalHandler = async event => {
-  return await pingServiceRepository(event.input);
+  return await ping(event.input);
 };
 
 export const handler = middy(originalHandler);

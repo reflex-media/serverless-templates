@@ -29,10 +29,10 @@ module.exports = {
   externals: [{ 'aws-sdk': 'commonjs aws-sdk' }],
   resolve: {
     alias: {
-      Middlewares: path.resolve(__dirname, 'src/app/middlewares/'),
-      Errors: path.resolve(__dirname, 'src/app/errors/'),
-      Constants: path.resolve(__dirname, 'src/app/constants/'),
-      Repositories: path.resolve(__dirname, 'src/app/repositories/'),
+      Middlewares: path.resolve(__dirname, 'src/middlewares/'),
+      Exceptions: path.resolve(__dirname, 'src/exceptions/'),
+      Constants: path.resolve(__dirname, 'src/constants/'),
+      Core: path.resolve(__dirname, 'src/core/'),
     }
   }
 };
