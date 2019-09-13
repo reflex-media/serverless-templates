@@ -1,0 +1,19 @@
+service:
+  name: serverless-templates-static-website
+
+plugins:
+  - serverless-webpack
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  profile: ${self:provider.environment.AWS_ACCOUNT_PROFILE}
+  region: ${opt:region, self:provider.environment.AWS_ACCOUNT_REGION, 'us-west-1'}
+  stackTags:
+    SITE: shared
+    PRODUCT: ${self:service}
+    STAGE: ${self:provider.stage}
+
+custom:
+  webpack:
+    packager: yarn
