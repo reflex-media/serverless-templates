@@ -1,7 +1,6 @@
 language: node_js
 node_js:
   - 10
-  - node
 branches:
   only:
     - master
@@ -9,7 +8,7 @@ cache:
   directories:
     - node_modules
 install:
-  - cd api-light && yarn install
+  - cd api-lite && yarn install
 script:
   - yarn test
   - yarn coveralls

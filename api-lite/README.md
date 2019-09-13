@@ -19,7 +19,7 @@ Bootstrap your next API serverless project with the most basic resources. Recomm
 Create Serverless project
 
 ```bash
-$ sls create --template-url https://github.com/mosufy/serverless-templates/tree/master/api-light --path my-service
+$ sls create --template-url https://github.com/mosufy/serverless-templates/tree/master/api-lite --path my-service
 $ cd my-service
 ```
 
@@ -66,7 +66,7 @@ All templates minimally have the same base skeleton as described below.
 └── tests
 ```
 
-**config/**
+**config/**  
 Contains serverless configurations.
 
 **config/environments/**  
@@ -106,7 +106,7 @@ Request middlewares. See [Middlewares](#middlewares) for more information.
 3rd party services or modules.
 
 **src/config.js**  
-Configuration used within your application.
+Configuration used within application.
 
 **tests/**  
 All test files to be written here.
@@ -133,8 +133,8 @@ $ yarn deploy -s dev
 ```bash
 $ yarn deploy -s {environment} -f {function_name}
 
-# Example deploy ServicePing function
-$ yarn deploy -s dev -f ServicePing
+# Example deploy Ping function
+$ yarn deploy -s dev -f Ping
 ```
 
 **Invoke single function**
@@ -142,8 +142,8 @@ $ yarn deploy -s dev -f ServicePing
 ```bash
 $ yarn invoke -s {environment} -f {function_name}
 
-# Example invoke ServicePing function
-$ yarn invoke -s dev -f ServicePing
+# Example invoke Ping function
+$ yarn invoke -s dev -f Ping
 ```
 
 **Tail log of a single function**
@@ -151,13 +151,13 @@ $ yarn invoke -s dev -f ServicePing
 ```bash
 $ yarn logs -s {environment} -f {function_name}
 
-# Example tail log of ServicePing function
-$ yarn logs -s dev -f ServicePing
+# Example tail log of Ping function
+$ yarn logs -s dev -f Ping
 ```
 
 ## Environment Configurations
 
-All environment configurations are available in the `environments/` directory, written in yaml format.
+All environment configurations are available in the `config/environments/` directory.
 
 ```yaml
 # Declare the environment
@@ -202,18 +202,18 @@ Returns the request with an "error class" response type.
 
 ## Middlewares
 
-Middlewares can be executed before or after a request. This will be useful for cases where an action needs to be done prior to the rest of the business logic, or when you needed to execute an action prior to the sending of the response.
+Middlewares can be executed before or after a request. This will be useful for cases where an action is required prior to reaching the handler, or when an action is required to execute prior to the returning of the response.
 
-Middlewares make use of [Middy npm](https://www.npmjs.com/package/middy) to work.
+Middlewares require [Middy npm](https://www.npmjs.com/package/middy) to work.
 
-Middlewares should be written as a handler in the `src/app/handlers/` directory.
+Middlewares should be written in the `src/middlewares/` directory.
 
 ### Available Middlewares
 
 This template contains 3 middlewares.
 
 **`normalizeHandler.js`**  
-This middleware will normalize query string parameters and/or json body in the request into a common `event.input`. This middleware executes _before_ the handler is called.
+This middleware will normalize query string parameters and/or json body in the request into a common `handler.event.input`. This middleware executes _before_ the handler is called.
 
 **`responseHandler.js`**  
 This middleware will be executed whenever a successful response is expected to be returned. This middleware executes _after_ the request is processed and _before_ the response is returned.
@@ -245,11 +245,11 @@ You may also import other ready-made middlewares from the [Middy repository](htt
 
 ### Custom Middlewares
 
-You can write your own middleware with [Middy](https://www.npmjs.com/package/middy#writing-a-middleware).
+You can write your own custom middleware with [Middy](https://www.npmjs.com/package/middy#writing-a-middleware).
 
 ## Error Handling
 
-It is recommended to always throw an Error class as an exception instead of returning just and error message. You may create your own Error Class within the `src/exceptions/` directory.
+It is recommended to always throw an Error class as an exception instead of returning just an error message. You may create your own Error Class within the `src/exceptions/` directory.
 
 ```js
 import ValidationError from "Errors/ValidationError";
@@ -271,9 +271,9 @@ You can define your own Error Classes as required. Refer to the existing `src/ex
 
 ### Unit Test
 
-This template uses Mocha, Chai, and NYC test frameworks for unit testing.
+This template uses Jest test framework for unit testing.
 
-All test files exists in the `test` directory.
+All test files exist in the `tests/` directory.
 
 **Run test**
 

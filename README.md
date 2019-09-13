@@ -17,7 +17,7 @@ Refer to the list of [available templates](#available-templates) to learn more o
 Create Serverless project
 
 ```bash
-$ sls create --template-url https://github.com/mosufy/serverless-templates/tree/master/api-light --path my-service
+$ sls create --template-url https://github.com/mosufy/serverless-templates/tree/master/api-lite --path my-service
 $ cd my-service
 ```
 
@@ -39,4 +39,4 @@ Access local url via browser or Postman (recommended): http://localhost:8181/pin
 
 See the available templates for more in-depth documentation and usage.
 
-- [api-light](https://github.com/mosufy/serverless-templates/tree/master/api-light)
+- [api-lite](https://github.com/mosufy/serverless-templates/tree/master/api-lite)
