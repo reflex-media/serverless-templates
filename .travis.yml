@@ -12,7 +12,5 @@ install:
   - cd api-lite && yarn install && cd ..
   - cd static-website && yarn install && cd ..
 script:
-  - cd api-lite && yarn test
-  - yarn coveralls && cd ..
-  - cd static-website && yarn test
-  - yarn coveralls && cd ..
+  - cd api-lite && yarn coveralls && cd ..
+  - cd static-website && yarn coveralls && cd ..
