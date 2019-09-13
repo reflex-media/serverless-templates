@@ -3,6 +3,7 @@
 import { UNKNOWN_ERROR, VALIDATION_ERROR, VALIDATION_ERROR_SAMPLE } from "Constants/errorCodes";
 import { errorHandlerResponse } from "Middlewares/errorHandler";
 import ValidationError from "Exceptions/ValidationError";
+import { app } from "../../src/config";
 
 describe("test errorHandler middleware", () => {
   it("test with thrown Error", () => {
@@ -71,5 +72,17 @@ describe("test errorHandler middleware", () => {
     expect(data.statusCode).toBe(500);
 
     expect(dataBody).toHaveProperty("_meta", { someEventKey: "someEventValue" });
+  });
+
+  it("test with error message with event in non-debug mode", () => {
+    // Set debug mode to false
+    app.debug = false;
+
+    const data = errorHandlerResponse("Test error message", { someEventKey: "someEventValue" });
+    const dataBody = JSON.parse(data.body);
+
+    expect(data.statusCode).toBe(500);
+
+    expect(dataBody).toHaveProperty("_meta", {});
   });
 });
