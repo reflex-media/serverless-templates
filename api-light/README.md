@@ -1,10 +1,12 @@
 # Lightweight API Serverless Template
+
 [![Build Status](https://travis-ci.org/reflex-media/serverless-templates.svg?branch=master)](https://travis-ci.org/reflex-media/serverless-templates)
 [![Coverage Status](https://coveralls.io/repos/github/reflex-media/serverless-templates/badge.svg?branch=master)](https://coveralls.io/github/reflex-media/serverless-templates?branch=master)
 
 Bootstrap your next API serverless project with the most basic resources. Recommended for quick, single function or endpoint.
 
 **Included Resources:**
+
 - API Gateway
 - Lambda
 
@@ -15,17 +17,20 @@ Bootstrap your next API serverless project with the most basic resources. Recomm
 **Prerequisites**: Install Serverless Framework with: `npm install -g serverless`.
 
 Create Serverless project
+
 ```bash
 $ sls create --template-url https://github.com/mosufy/serverless-templates/tree/master/api-light --path my-service
 $ cd my-service
 ```
 
 Install dependencies
+
 ```bash
 $ yarn install
 ```
 
 Start local
+
 ```bash
 $ yarn start
 ```
@@ -33,6 +38,7 @@ $ yarn start
 Access local url via browser or Postman (recommended): http://localhost:8181/ping
 
 ## Directory Structure
+
 All templates minimally have the same base skeleton as described below.
 
 ```
@@ -108,11 +114,13 @@ All test files to be written here.
 ## Available Commands
 
 **Start local**
+
 ```bash
 $ yarn start
 ```
 
 **Deploy application**
+
 ```bash
 $ yarn deploy -s {environment}
 
@@ -121,6 +129,7 @@ $ yarn deploy -s dev
 ```
 
 **Deploy single function**
+
 ```bash
 $ yarn deploy -s {environment} -f {function_name}
 
@@ -129,6 +138,7 @@ $ yarn deploy -s dev -f ServicePing
 ```
 
 **Invoke single function**
+
 ```bash
 $ yarn invoke -s {environment} -f {function_name}
 
@@ -137,6 +147,7 @@ $ yarn invoke -s dev -f ServicePing
 ```
 
 **Tail log of a single function**
+
 ```bash
 $ yarn logs -s {environment} -f {function_name}
 
@@ -145,6 +156,7 @@ $ yarn logs -s dev -f ServicePing
 ```
 
 ## Environment Configurations
+
 All environment configurations are available in the `environments/` directory, written in yaml format.
 
 ```yaml
@@ -170,7 +182,7 @@ AWS_LAMBDA_MEMORY_SIZE: 128
 AWS_LOG_RETENTION_DAYS: 7
 
 # Define your own custom API Gateway Secret Key
-AWS_APIGATEWAY_SECRET_KEY: 
+AWS_APIGATEWAY_SECRET_KEY:
 ```
 
 ## Available Endpoints
@@ -189,6 +201,7 @@ Returns the request with an "error message" response type.
 Returns the request with an "error class" response type.
 
 ## Middlewares
+
 Middlewares can be executed before or after a request. This will be useful for cases where an action needs to be done prior to the rest of the business logic, or when you needed to execute an action prior to the sending of the response.
 
 Middlewares make use of [Middy npm](https://www.npmjs.com/package/middy) to work.
@@ -200,13 +213,13 @@ Middlewares should be written as a handler in the `src/app/handlers/` directory.
 This template contains 3 middlewares.
 
 **`normalizeHandler.js`**  
-This middleware will normalize query string parameters and/or json body in the request into a common `event.input`. This middleware executes *before* the handler is called.
+This middleware will normalize query string parameters and/or json body in the request into a common `event.input`. This middleware executes _before_ the handler is called.
 
 **`responseHandler.js`**  
-This middleware will be executed whenever a successful response is expected to be returned. This middleware executes *after* the request is processed and *before* the response is returned.
+This middleware will be executed whenever a successful response is expected to be returned. This middleware executes _after_ the request is processed and _before_ the response is returned.
 
 **`errorHandler.js`**  
-This middleware will be executed whenever an error response is expected to be returned. This middleware executes *after* the request is processed and  *before* the response is returned.
+This middleware will be executed whenever an error response is expected to be returned. This middleware executes _after_ the request is processed and _before_ the response is returned.
 
 ```js
 import middy from "middy";
@@ -215,7 +228,7 @@ import responseHandler from "Middlewares/responseHandler";
 import errorHandler from "Middlewares/errorHandler";
 
 const originalHandler = async () => {
-  return await new Promise((resolve) => resolve("Pong"));
+  return await new Promise(resolve => resolve("Pong"));
 };
 
 export const handler = middy(originalHandler);
@@ -225,6 +238,7 @@ handler
   .use(responseHandler())
   .use(errorHandler());
 ```
+
 Refer to `src/handlers/ping.js` for usage.
 
 You may also import other ready-made middlewares from the [Middy repository](https://www.npmjs.com/package/middy#available-middlewares).
@@ -246,7 +260,7 @@ const someFunction = () => {
     40001002,
     400
   );
-}
+};
 ```
 
 Refer to the sample `src/core/ping.js` for usage.
@@ -256,17 +270,21 @@ Refer to the sample `src/core/ping.js` for usage.
 You can define your own Error Classes as required. Refer to the existing `src/exceptions/ValidationError.js` class.
 
 ### Unit Test
+
 This template uses Mocha, Chai, and NYC test frameworks for unit testing.
 
 All test files exists in the `test` directory.
 
 **Run test**
+
 ```bash
 $ yarn test
 ```
 
 **Run code coverage report**
+
 ```bash
 $ yarn coverage
 ```
+
 View the generated html report in `coverage/index.html`.

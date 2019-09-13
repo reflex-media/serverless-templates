@@ -42,12 +42,17 @@ describe("test normalizeRequest middleware", () => {
       JSON.stringify({ someKeyBody: "someValueBody" })
     );
 
-    expect(data).toMatchObject({ someKeyQS: "someValueQS", someKeyBody: "someValueBody" });
+    expect(data).toMatchObject({
+      someKeyQS: "someValueQS",
+      someKeyBody: "someValueBody",
+    });
   });
 
   it("test with invalid body and valid Content-Type", () => {
     expect(() =>
-      normalize({ "Content-Type": "application/json" }, null, { someKey: "someValue" })
+      normalize({ "Content-Type": "application/json" }, null, {
+        someKey: "someValue",
+      })
     ).toThrow(
       new ValidationError(
         "Content type defined as JSON but an invalid JSON was provided",

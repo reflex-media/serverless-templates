@@ -12,13 +12,21 @@ export default /* istanbul ignore next */ opts => {
 
   return {
     after: (handler, next) => {
-      handler.response = responseHandlerResponse(handler.response, options.statusCode, handler.event);
+      handler.response = responseHandlerResponse(
+        handler.response,
+        options.statusCode,
+        handler.event
+      );
       next();
     },
   };
 };
 
-export const responseHandlerResponse = (response, statusCode = 200, event = {}) => {
+export const responseHandlerResponse = (
+  response,
+  statusCode = 200,
+  event = {}
+) => {
   return {
     headers: {
       "Access-Control-Allow-Credentials": true,
@@ -32,4 +40,4 @@ export const responseHandlerResponse = (response, statusCode = 200, event = {}) 
       _meta: app.debug ? event : {},
     }),
   };
-}
+};

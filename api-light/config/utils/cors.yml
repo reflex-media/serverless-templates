@@ -1,4 +1,4 @@
-origin: '*'
+origin: "*"
 headers:
   - Authorization
   - Content-Type

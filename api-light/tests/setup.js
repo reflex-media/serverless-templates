@@ -6,5 +6,5 @@ import * as config from "../src/config";
 config.app = {
   ...config.app,
   env: "testing",
-  debug: true
+  debug: true,
 };

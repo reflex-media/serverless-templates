@@ -21,8 +21,8 @@ provider:
   environment: ${file(./config/environments/${self:provider.stage}.yml)}
   apiKeys:
     - usagePlan:
-      - name: ${self:provider.stackName}-apiKey
-        value: ${self:provider.environment.AWS_APIGATEWAY_SECRET_KEY}
+        - name: ${self:provider.stackName}-apiKey
+          value: ${self:provider.environment.AWS_APIGATEWAY_SECRET_KEY}
   usagePlan:
     - usagePlan:
   stackTags:
@@ -38,7 +38,7 @@ custom:
   serverless-offline:
     port: 8181
   webpack:
-    packager: 'yarn'
+    packager: yarn
   logRetentionInDays: ${self:provider.environment.AWS_LOG_RETENTION_DAYS, 7}
   contentEncoding:
     contentCompression: ${self:provider.environment.AWS_APIGATEWAY_COMPRESSION_MAX_BYTES, 100}
@@ -46,7 +46,7 @@ custom:
     cors: ${file(config/utils/cors.yml)}
 
 # Add all the functions here
-functions: 
+functions:
   - ${file(${self:custom.path.functions}/ping.yml)}
 
 # Add all the additional resources here

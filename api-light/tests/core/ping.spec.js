@@ -1,7 +1,10 @@
 "use strict";
 
 import ping from "Core/ping";
-import { VALIDATION_ERROR_SAMPLE, VALIDATION_ERROR_UNKNOWN_PARAMETER } from "Constants/errorCodes";
+import {
+  VALIDATION_ERROR_SAMPLE,
+  VALIDATION_ERROR_UNKNOWN_PARAMETER,
+} from "Constants/errorCodes";
 
 describe("test ping core", () => {
   it("ping request should return Pong", () => {
@@ -9,7 +12,9 @@ describe("test ping core", () => {
   });
 
   it("ping request with sample error should return error message", () => {
-    return expect(ping({ "sample-error": "message" })).rejects.toBe("Error Message");
+    return expect(ping({ "sample-error": "message" })).rejects.toBe(
+      "Error Message"
+    );
   });
 
   it("ping request with sample error exception should return error exception", () => {

@@ -11,7 +11,7 @@ export default /* istanbul ignore next */ opts => {
       const { headers, queryStringParameters, body } = handler.event;
       handler.event.input = normalize(headers, queryStringParameters, body);
       next();
-    }
+    },
   };
 };
 
@@ -31,7 +31,7 @@ export const normalize = (headers, qs, body) => {
     try {
       input = {
         ...input,
-        ...JSON.parse(body)
+        ...JSON.parse(body),
       };
     } catch (err) {
       throw new ValidationError(
