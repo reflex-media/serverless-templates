@@ -8,6 +8,7 @@
     "pretest": "eslint --ignore-path .gitignore .",
     "test": "react-scripts test",
     "coverage": "npm test -- --coverage",
+    "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls",
     "eject": "react-scripts eject"
   },
   "dependencies": {
@@ -21,10 +22,13 @@
     "@babel/polyfill": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "babel-loader": "^8.0.6",
+    "coveralls": "^3.0.6",
     "eslint": "^6.3.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-prettier": "^3.1.0",
+    "husky": ">=1",
+    "lint-staged": ">=8",
     "prettier": "^1.18.2",
     "serverless-webpack": "^5.3.1",
     "webpack": "4.39.1"
@@ -63,5 +67,16 @@
   "license": "MIT",
   "engines": {
     "node": ">=10.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
