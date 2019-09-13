@@ -1,5 +1,6 @@
 # Lightweight API Serverless Template
 [![Build Status](https://travis-ci.org/reflex-media/serverless-templates.svg?branch=master)](https://travis-ci.org/reflex-media/serverless-templates)
+[![Coverage Status](https://coveralls.io/repos/github/reflex-media/serverless-templates/badge.svg?branch=master)](https://coveralls.io/github/reflex-media/serverless-templates?branch=master)
 
 Bootstrap your next API serverless project with the most basic resources. Recommended for quick, single function or endpoint.
 
