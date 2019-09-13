@@ -4,11 +4,14 @@ node_js:
 branches:
   only:
     - master
+    - static-website
 cache:
   directories:
     - node_modules
 install:
-  - cd api-lite && yarn install
+  - cd api-lite && yarn install && cd ..
+  - cd static-website && yarn install && cd ..
 script:
-  - yarn test
-  - yarn coveralls
+  - cd api-lite && yarn test
+  - yarn coveralls && cd ..
+  - cd static-website && yarn test
