@@ -2,8 +2,6 @@ const path = require('path');
 // eslint-disable-next-line import/no-unresolved
 const slsw = require('serverless-webpack');
 
-const { stage } = slsw.lib.options;
-
 module.exports = {
   entry: slsw.lib.entries,
   output: {
@@ -11,7 +9,7 @@ module.exports = {
     filename: '[name].js',
     path: path.join(__dirname, '.webpack'),
   },
-  mode: stage === 'local' ? 'development' : 'production',
+  mode: 'production',
   target: 'node',
   module: {
     rules: [

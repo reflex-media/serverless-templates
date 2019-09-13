@@ -8,8 +8,8 @@
     "deploy": "./scripts/serverless.sh",
     "invoke": "./scripts/serverless.sh -t invoke",
     "logs": "./scripts/serverless.sh -t logs",
-    "test": "NODE_PATH=./src/app ./node_modules/.bin/mocha --require babel-register --require babel-polyfill test/*",
-    "coverage": "nyc --reporter=lcov --reporter=html --reporter=text-summary npm run test"
+    "test": "./node_modules/.bin/mocha --require babel-register --require babel-polyfill test/*",
+    "coverage": "nyc --reporter=html --reporter=text-summary npm run test"
   },
   "dependencies": {
     "middy": "^0.29.0",
@@ -21,6 +21,7 @@
     "babel-loader": "^7.1.1",
     "babel-plugin-syntax-object-rest-spread": "^6.13.0",
     "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-plugin-webpack-aliases": "^1.1.3",
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.6.0",
     "babel-register": "^6.26.0",
@@ -38,15 +39,36 @@
   "author": "Sufiyan Rahmat <mosufy@gmail.com>",
   "license": "MIT",
   "nyc": {
+    "all": true,
+    "include": [
+      "src/app/**/*.js"
+    ],
+    "exclude": [
+      "src/app/config.js",
+      "src/app/handlers/**/*.js"
+    ],
+    "check-coverage": true,
     "branches": 80,
     "lines": 80,
     "functions": 80,
     "statements": 80,
     "watermarks": {
-      "lines": [80, 95],
-      "functions": [80, 95],
-      "branches": [80, 95],
-      "statements": [80, 95]
+      "lines": [
+        80,
+        95
+      ],
+      "functions": [
+        80,
+        95
+      ],
+      "branches": [
+        80,
+        95
+      ],
+      "statements": [
+        80,
+        95
+      ]
     }
   }
 }
