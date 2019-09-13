@@ -1,5 +1,3 @@
-"use strict";
-
 import { VALIDATION_ERROR_UNKNOWN_PARAMETER } from "Constants/errorCodes";
 import { normalize } from "Middlewares/normalizeRequest";
 import ValidationError from "Exceptions/ValidationError";

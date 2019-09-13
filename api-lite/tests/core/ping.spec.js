@@ -1,5 +1,3 @@
-"use strict";
-
 import ping from "Core/ping";
 import {
   VALIDATION_ERROR_SAMPLE,

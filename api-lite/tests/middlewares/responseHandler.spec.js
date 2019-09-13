@@ -1,5 +1,3 @@
-"use strict";
-
 import { responseHandlerResponse } from "Middlewares/responseHandler";
 import { app } from "../../src/config";
 

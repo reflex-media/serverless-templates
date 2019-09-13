@@ -1,5 +1,3 @@
-"use strict";
-
 import { VALIDATION_ERROR } from "Constants/errorCodes";
 
 export default class ValidationError extends Error {

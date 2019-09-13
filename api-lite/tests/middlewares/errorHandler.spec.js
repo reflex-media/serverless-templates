@@ -1,5 +1,3 @@
-"use strict";
-
 import {
   UNKNOWN_ERROR,
   VALIDATION_ERROR,

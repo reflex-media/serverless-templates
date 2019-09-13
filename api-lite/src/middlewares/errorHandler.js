@@ -1,24 +1,5 @@
-import { app } from "../config";
 import { UNKNOWN_ERROR } from "Constants/errorCodes";
-
-/**
- * Formats response for error responses
- */
-export default /* istanbul ignore next */ opts => {
-  const defaults = {
-    logger: console.error,
-  };
-
-  const options = { ...defaults, ...opts };
-
-  return {
-    onError: (handler, next) => {
-      if (typeof options.logger === "function") options.logger(handler.error);
-      handler.response = errorHandlerResponse(handler.error, handler.event);
-      next();
-    },
-  };
-};
+import { app } from "../config";
 
 export const errorHandlerResponse = (error, event = {}) => {
   return {
@@ -40,5 +21,25 @@ export const errorHandlerResponse = (error, event = {}) => {
       },
       _meta: app.debug ? event : {},
     }),
+  };
+};
+
+/**
+ * Formats response for error responses
+ */
+export default /* istanbul ignore next */ opts => {
+  const defaults = {
+    logger: console.error, // eslint-disable-line no-console
+  };
+
+  const options = { ...defaults, ...opts };
+
+  return {
+    onError: (handler, next) => {
+      if (typeof options.logger === "function") options.logger(handler.error);
+      // eslint-disable-next-line no-param-reassign
+      handler.response = errorHandlerResponse(handler.error, handler.event);
+      next();
+    },
   };
 };

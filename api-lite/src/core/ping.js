@@ -9,6 +9,7 @@ const ping = input => {
     if (!input) return resolve("Pong");
 
     if (input["sample-error"] === "message") {
+      // eslint-disable-next-line prefer-promise-reject-errors
       return reject("Error Message");
     }
 
@@ -18,7 +19,7 @@ const ping = input => {
       );
     }
 
-    reject(
+    return reject(
       new ValidationError(
         "Unknown parameter supplied",
         VALIDATION_ERROR_UNKNOWN_PARAMETER

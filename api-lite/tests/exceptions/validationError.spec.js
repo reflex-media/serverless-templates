@@ -1,5 +1,3 @@
-"use strict";
-
 import ValidationError from "Exceptions/ValidationError";
 import {
   VALIDATION_ERROR,

@@ -1,20 +1,6 @@
 import ValidationError from "Exceptions/ValidationError";
 import { VALIDATION_ERROR_UNKNOWN_PARAMETER } from "Constants/errorCodes";
 
-/**
- * Normalizes handler.event.body and handler.event.queryStringParameters
- * as handler.event.input Object
- */
-export default /* istanbul ignore next */ opts => {
-  return {
-    before: (handler, next) => {
-      const { headers, queryStringParameters, body } = handler.event;
-      handler.event.input = normalize(headers, queryStringParameters, body);
-      next();
-    },
-  };
-};
-
 export const normalize = (headers, qs, body) => {
   let input = null;
 
@@ -42,4 +28,19 @@ export const normalize = (headers, qs, body) => {
   }
 
   return input;
+};
+
+/**
+ * Normalizes handler.event.body and handler.event.queryStringParameters
+ * as handler.event.input Object
+ */
+export default /* istanbul ignore next */ () => {
+  return {
+    before: (handler, next) => {
+      const { headers, queryStringParameters, body } = handler.event;
+      // eslint-disable-next-line no-param-reassign
+      handler.event.input = normalize(headers, queryStringParameters, body);
+      next();
+    },
+  };
 };
