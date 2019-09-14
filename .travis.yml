@@ -8,9 +8,16 @@ branches:
 cache:
   directories:
     - node_modules
-install:
-  - cd api-lite && yarn install && cd ..
-  - cd static-website && yarn install && cd ..
-script:
-  - cd api-lite && yarn coveralls && cd ..
-  - cd static-website && yarn coveralls && cd ..
+
+matrix:
+  include:
+    - name: "api-lite test suite"
+      install:
+        - cd api-lite && yarn install
+      script:
+        - yarn coveralls
+    - name: "static website test suite"
+      install:
+        - cd static-website && yarn install
+      script:
+        - yarn coveralls
