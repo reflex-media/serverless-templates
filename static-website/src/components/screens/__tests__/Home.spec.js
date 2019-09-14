@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 
-import Home from "Components/screens/Home";
+import Home from "../Home";
 
 describe("test Home component", () => {
   it("should render correctly", () => {

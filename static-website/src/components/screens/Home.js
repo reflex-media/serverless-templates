@@ -1,6 +1,6 @@
 import React from "react";
 
-import HomeHeader from "Components/modules/HomeHeader";
+import HomeHeader from "components/modules/HomeHeader";
 
 const Home = () => {
   return <HomeHeader />;

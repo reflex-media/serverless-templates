@@ -1,8 +1,8 @@
 import React from "react";
 
-import "Assets/styles/App.css";
+import "assets/styles/App.css";
 
-import HomeHeader from "Components/modules/HomeHeader";
+import HomeHeader from "components/modules/HomeHeader";
 
 function App() {
   return (

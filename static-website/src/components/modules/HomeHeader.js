@@ -1,6 +1,6 @@
 import React from "react";
 
-import Logo from "Components/atoms/Logo";
+import Logo from "components/atoms/Logo";
 
 const HomeHeader = () => {
   return (
