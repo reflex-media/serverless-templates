@@ -16,7 +16,7 @@ matrix:
         - cd api-lite && yarn install
       script:
         - yarn coveralls
-    - name: "static website test suite"
+    - name: "static-website test suite"
       install:
         - cd static-website && yarn install
       script:

@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const path = require("path");
 // eslint-disable-next-line import/no-unresolved
 const slsw = require("serverless-webpack");
@@ -25,5 +26,11 @@ module.exports = {
         ],
       },
     ],
+  },
+  resolve: {
+    alias: {
+      Assets: path.resolve(__dirname, "src/assets/"),
+      Components: path.resolve(__dirname, "src/components/"),
+    },
   },
 };

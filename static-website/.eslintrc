@@ -1,8 +1,11 @@
 {
   "extends": ["airbnb", "plugin:prettier/recommended", "react-app"],
+  "settings": {
+    "import/resolver": "webpack"
+  },
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/jsx-one-expression-per-line": "off",
-    "react/jsx-closing-bracket-location": "off",
+    "react/jsx-closing-bracket-location": "off"
   }
 }

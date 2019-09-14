@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test HomeHeader component should render correctly 1`] = `
+<header
+  className="App-header"
+>
+  <Logo />
+  <p>
+    Edit 
+    <code>
+      src/components/App.js
+    </code>
+     and save to reload.
+  </p>
+  <a
+    className="App-link"
+    href="https://reactjs.org"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    Learn React
+  </a>
+</header>
+`;
