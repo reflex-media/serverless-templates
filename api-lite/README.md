@@ -44,10 +44,11 @@ All templates minimally have the same base skeleton as described below.
 ```
 ├── config
 |   ├── environments
-|   |   ├── dev.yml
-|   |   ├── local.yml
-|   |   ├── prod.yml
-|   |   └── test.yml
+|   |   ├── .env
+|   |   ├── .env.local
+|   |   ├── .env.development
+|   |   ├── .env.staging
+|   |   └── .env.production
 |   ├── functions
 |   ├── resources
 |   ├── utils
@@ -70,7 +71,13 @@ All templates minimally have the same base skeleton as described below.
 Contains serverless configurations.
 
 **config/environments/**  
-Contains environment-specific values for the config.
+Contains environment-specific configurations. The environment files are used for both deployment and within application code.
+
+> `.env`: default environment, served as a local example.  
+> `.env.local`: local environment configuration. This should not be committed.  
+> `.env.development`: development environment configuration.  
+> `.env.staging`: staging environment configuration.  
+> `.env.production`: production environment configuration.
 
 **config/functions/**  
 Serverless functions should be configured here.
@@ -159,30 +166,33 @@ $ yarn logs -s dev -f Ping
 
 All environment configurations are available in the `config/environments/` directory.
 
-```yaml
+```bash
 # Declare the environment
-APP_ENV: dev
+APP_ENV="development"
 
 # Enable/disable debug mode
-APP_DEBUG: true
+APP_DEBUG=true
 
 # Determine the region to deploy to
-AWS_ACCOUNT_REGION: us-west-1
+AWS_ACCOUNT_REGION="us-west-1"
 
 # This name needs to match the aws credentials profile on your local machine
-AWS_ACCOUNT_PROFILE: slsDevProfile
+AWS_ACCOUNT_PROFILE="slsDevProfile"
 
 # Set the default timeout for all lambda functions
-AWS_LAMBDA_TIMEOUT: 3
+AWS_LAMBDA_TIMEOUT=3
 
 # Set the default memory size for all lambda functions
-AWS_LAMBDA_MEMORY_SIZE: 128
+AWS_LAMBDA_MEMORY_SIZE=128
 
 # Set the default retention period for all cloudwatch logs
-AWS_LOG_RETENTION_DAYS: 7
+AWS_LOG_RETENTION_DAYS=7
 
 # Define your own custom API Gateway Secret Key
-AWS_APIGATEWAY_SECRET_KEY:
+AWS_APIGATEWAY_SECRET_KEY=
+
+# Maximum size before gzip compression for response
+AWS_APIGATEWAY_COMPRESSION_MAX_BYTES=
 ```
 
 ## Available Endpoints
@@ -269,7 +279,7 @@ Refer to the sample `src/core/ping.js` for usage.
 
 You can define your own Error Classes as required. Refer to the existing `src/exceptions/ValidationError.js` class.
 
-### Unit Test
+## Unit Test
 
 This template uses Jest test framework for unit testing.
 
@@ -288,3 +298,7 @@ $ yarn coverage
 ```
 
 View the generated html report in `coverage/index.html`.
+
+### Test environment
+
+Declare test environment configurations as NODE variables in `tests/setup.js`.

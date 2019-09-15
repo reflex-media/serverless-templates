@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "description": "Serverless Framework for lightweight api project",
   "scripts": {
-    "start": "sls offline start --stage local",
-    "server": "sls offline start --stage local",
+    "start": "sls offline start --stage local --env local",
+    "server": "sls offline start --stage local --env local",
     "deploy": "./scripts/serverless.sh",
     "invoke": "./scripts/serverless.sh -t invoke",
     "logs": "./scripts/serverless.sh -t logs",
@@ -39,6 +39,7 @@
     "lint-staged": ">=8",
     "path": "^0.12.7",
     "prettier": "^1.18.2",
+    "serverless-dotenv-plugin": "^2.1.1",
     "serverless-offline": "^5.10.1",
     "serverless-plugin-log-retention": "^2.0.0",
     "serverless-plugin-optimize": "^4.1.0-rc.1",

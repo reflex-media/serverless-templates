@@ -1,10 +1,4 @@
-import * as config from "../src/config";
+// Add test-specific environment configurations
 
-/**
- * Mock the environment for this test
- */
-config.app = {
-  ...config.app,
-  env: "testing",
-  debug: true,
-};
+process.env.APP_ENV = "test";
+process.env.APP_DEBUG = true;
