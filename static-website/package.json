@@ -8,8 +8,8 @@
     "deploy": "./scripts/serverless.sh",
     "pretest": "eslint --ignore-path .gitignore .",
     "test": "react-scripts test",
-    "coverage": "npm test -- --coverage",
-    "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls",
+    "coverage": "yarn test --coverage --watchAll false",
+    "coveralls": "yarn coverage && cat ./coverage/lcov.info | coveralls",
     "eject": "react-scripts eject"
   },
   "dependencies": {
