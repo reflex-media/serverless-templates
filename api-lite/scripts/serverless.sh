@@ -10,13 +10,13 @@ usage="$(basename "$0") [-f] [-s] [-t] [-h] -- script to deploy serverless funct
 
 where:
     -f      deploy single function
-    -s      deploy to a specific stage/environment (E.G: dev, test, prod)
+    -s      deploy to a specific stage/environment (e.g; development, staging, production)
     -t      define the type of action to be taken (Optional)
     -h      show this help text"
 
 # arg options
-FUNCTION='';     # deploy single function
-STAGE='';        # deploy specific stage/environment
+FUNCTION='';    # deploy single function
+STAGE='';       # deploy specific stage/environment
 INVOKE=0;       # invoke the function
 LOGS=0;         # Stream the function logs
 
@@ -64,7 +64,7 @@ NC='\033[0m';
 
 function deploy_func_check ()
 {
-    if [ ${STAGE} == "prod" ]; then
+    if [ ${STAGE} == "production" ]; then
         prompt_confirmation_deploy_function
     else
         deploy_func
@@ -126,7 +126,7 @@ function log_stream_func ()
 ###############################################################################
 
 if [ -n "$STAGE" ]; then
-    if [ ${STAGE} == "dev" ] || [ ${STAGE} == "test" ] || [ ${STAGE} == "prod" ] || [ ${STAGE} == "personal" ]; then
+    if [ ${STAGE} == "development" ] || [ ${STAGE} == "staging" ] || [ ${STAGE} == "production" ]; then
         if [ ${INVOKE} -eq 1 ]; then
             if [ -n "$FUNCTION" ]; then
                 invoke_func
@@ -154,7 +154,7 @@ if [ -n "$STAGE" ]; then
             fi
         fi
     else
-        echo -e "${RED}Invalid Stage [-s] supplied. Only 'personal', 'dev', 'test' or 'prod' are allowed.${NC}"
+        echo -e "${RED}Invalid Stage [-s] supplied. Only 'development', 'staging', or 'production' are allowed.${NC}"
         exit 1;
     fi
 else
