@@ -39,8 +39,6 @@ Access local url via browser or Postman (recommended): http://localhost:8181/pin
 
 ## Directory Structure
 
-All templates minimally have the same base skeleton as described below.
-
 ```
 ├── config
 |   ├── environments
@@ -51,7 +49,7 @@ All templates minimally have the same base skeleton as described below.
 |   |   └── .env.production
 |   ├── functions
 |   ├── resources
-|   ├── utils
+|   └── utils
 ├── scripts
 ├── src
 |   ├── constants
