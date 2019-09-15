@@ -33,6 +33,7 @@
     "husky": ">=1",
     "lint-staged": ">=8",
     "prettier": "^1.18.2",
+    "serverless-finch": "^2.4.3",
     "serverless-webpack": "^5.3.1",
     "webpack": "4.39.1"
   },

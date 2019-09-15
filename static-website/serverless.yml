@@ -3,12 +3,14 @@ service:
 
 plugins:
   - serverless-webpack
+  - serverless-finch
 
 provider:
   name: aws
   runtime: nodejs10.x
   profile: ${self:provider.environment.AWS_ACCOUNT_PROFILE}
   region: ${opt:region, self:provider.environment.AWS_ACCOUNT_REGION, 'us-west-1'}
+  environment: ${file(./config/environments/${self:provider.stage}.yml)}
   stackTags:
     SITE: shared
     PRODUCT: ${self:service}
@@ -17,3 +19,8 @@ provider:
 custom:
   webpack:
     packager: yarn
+  client:
+    bucketName: ${self:provider.environment.CLIENT_S3_BUCKETNAME}
+    distributionFolder: ${self:provider.environment.CLIENT_APP_DISTFOLDER}
+    indexDocument: index.html
+    errorDocument: index.html
