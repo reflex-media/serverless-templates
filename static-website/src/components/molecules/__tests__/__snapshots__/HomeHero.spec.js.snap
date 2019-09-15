@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test HomeHeader component should render correctly 1`] = `
+exports[`test HomeHero molecule should render correctly 1`] = `
 <header
   className="App-header"
 >
@@ -40,7 +40,7 @@ exports[`test HomeHeader component should render correctly 1`] = `
 </header>
 `;
 
-exports[`test HomeHeader component should render with debug turned off 1`] = `
+exports[`test HomeHero molecule should render with debug turned off 1`] = `
 <header
   className="App-header"
 >

@@ -3,7 +3,7 @@ import React from "react";
 import Logo from "components/atoms/Logo";
 import { app } from "../../config";
 
-const HomeHeader = () => {
+const HomeHero = () => {
   return (
     <header className="App-header">
       <Logo />
@@ -25,4 +25,4 @@ const HomeHeader = () => {
   );
 };
 
-export default HomeHeader;
+export default HomeHero;

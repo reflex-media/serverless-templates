@@ -43,7 +43,8 @@
       "enzyme-to-json/serializer"
     ],
     "collectCoverageFrom": [
-      "src/components/**/*.js"
+      "src/components/**/*.js",
+      "src/pages/**/*.js"
     ],
     "coverageReporters": [
       "html",

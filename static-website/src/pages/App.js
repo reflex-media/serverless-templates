@@ -2,12 +2,12 @@ import React from "react";
 
 import "assets/styles/App.css";
 
-import HomeHeader from "components/modules/HomeHeader";
+import Home from "./Home";
 
 function App() {
   return (
     <div className="App">
-      <HomeHeader />
+      <Home />
     </div>
   );
 }

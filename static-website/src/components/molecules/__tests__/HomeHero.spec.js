@@ -1,18 +1,18 @@
 import React from "react";
 import { shallow } from "enzyme";
 
-import HomeHeader from "../HomeHeader";
+import HomeHero from "../HomeHero";
 import { app } from "../../../config";
 
-describe("test HomeHeader component", () => {
+describe("test HomeHero molecule", () => {
   it("should render correctly", () => {
-    const component = shallow(<HomeHeader />);
+    const component = shallow(<HomeHero />);
     expect(component).toMatchSnapshot();
   });
 
   it("should render with debug turned off", () => {
     app.debug = false;
-    const component = shallow(<HomeHeader />);
+    const component = shallow(<HomeHero />);
     expect(component).toMatchSnapshot();
     app.debug = true;
   });
