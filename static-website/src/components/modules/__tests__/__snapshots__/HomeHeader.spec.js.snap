@@ -20,5 +20,62 @@ exports[`test HomeHeader component should render correctly 1`] = `
   >
     Learn React
   </a>
+  <ul
+    style={
+      Object {
+        "fontSize": "16px",
+        "listStyleType": "none",
+      }
+    }
+  >
+    <li>
+      APP_ENV: 
+      test
+    </li>
+    <li>
+      APP_DEBUG: 
+      true
+    </li>
+  </ul>
+</header>
+`;
+
+exports[`test HomeHeader component should render with debug turned off 1`] = `
+<header
+  className="App-header"
+>
+  <Logo />
+  <p>
+    Edit 
+    <code>
+      src/components/App.js
+    </code>
+     and save to reload.
+  </p>
+  <a
+    className="App-link"
+    href="https://reactjs.org"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    Learn React
+  </a>
+  <ul
+    style={
+      Object {
+        "fontSize": "16px",
+        "listStyleType": "none",
+      }
+    }
+  >
+    <li>
+      APP_ENV: 
+      test
+    </li>
+    <li>
+      APP_DEBUG: 
+      false
+    </li>
+  </ul>
 </header>
 `;

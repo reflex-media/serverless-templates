@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Serverless Framework for static website",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "./scripts/start.sh",
+    "build": "./scripts/build.sh",
+    "deploy": "./scripts/serverless.sh",
     "pretest": "eslint --ignore-path .gitignore .",
     "test": "react-scripts test",
     "coverage": "npm test -- --coverage",
