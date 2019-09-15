@@ -74,7 +74,7 @@ function deploy_func_check ()
 function deploy_func ()
 {
     echo -e "${YELLOW}Deploying ${FUNCTION} to ${STAGE}${NC}"
-    sls deploy -f ${FUNCTION} --stage ${STAGE}
+    sls deploy -f ${FUNCTION} --stage ${STAGE} --env ${STAGE}
 }
 
 function prompt_confirmation_deploy_all ()
@@ -104,7 +104,7 @@ function prompt_confirmation_deploy_function ()
 function deploy_full ()
 {
     echo -e "${YELLOW}Deploying service to ${STAGE}${NC}"
-    sls deploy --stage ${STAGE}
+    sls deploy --stage ${STAGE} --env ${STAGE}
 }
 
 function invoke_func ()
