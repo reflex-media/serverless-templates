@@ -1,5 +1,5 @@
 {
-  "name": "serverless-templates-static-website",
+  "name": "serverless-template-static-website",
   "version": "1.0.0",
   "description": "Serverless Framework for static website",
   "scripts": {

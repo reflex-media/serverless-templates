@@ -9,12 +9,12 @@
 usage="$(basename "$0") [-s=] [-n] [-h] -- script to deploy static website to S3 bucket
 
 where:
-    -s      deploy to a specific stage/environment (e.g; development, staging, production)
+    -s      deploy to a specific stage/environment (e.g; dev, stage, prod)
     -n      determine if to run without confirmation prompt.
     -h      show this help text"
 
 # arg options
-STAGE='development';  # deploy specific stage/environment
+STAGE='dev';  # deploy specific stage/environment
 NOCONFIRM=0;          # deploy without confirmation prompt
 
 # parse the options
@@ -33,11 +33,35 @@ while getopts "s:nh" OPT ; do
   esac
 done
 
+# Set envfile
+ENVFILE=${STAGE}
+
+# rewrite stage names
+if [ ${STAGE} == "production" ]; then
+    STAGE="prod"
+elif [ ${STAGE} == "prod" ]; then
+    ENVFILE="production"
+elif [ ${STAGE} == "staging" ]; then
+    STAGE="stage"
+elif [ ${STAGE} == "stage" ]; then
+    ENVFILE="staging"
+elif [ ${STAGE} == "development" ]; then
+    STAGE="dev"
+elif [ ${STAGE} == "dev" ]; then
+    ENVFILE="development"
+fi
+
+# Check if local env file exists
+FILE=config/environments/.env.${ENVFILE}.local
+if [ -f "$FILE" ]; then
+    ENVFILE=${ENVFILE}.local
+fi
+
 # include parse_yaml function
 . ./scripts/parse-yaml.sh;
 
 # read yaml file
-eval $(parse_yaml ./config/environments/.env.${STAGE} "ENV_");
+eval $(parse_yaml ./config/environments/.env.${ENVFILE} "ENV_");
 
 # access yaml content
 var=ENV_CLIENT_CF_ID;
@@ -65,20 +89,19 @@ NC='\033[0m';
 echo -e "${PURPLE}Starting command...${NC}"
 
 echo -e "Configuring website env file"
-mv ./.env.development.local ./.env.development.local.bak
-cp ./config/environments/.env.${STAGE} ./.env
+cp ./config/environments/.env.${ENVFILE} ./.env.local
 
 echo "Bundling website"
 yarn build
 
-echo "Resetting website env file"
-mv ./.env.development.bak ./.env.development.local
+echo "Removing website env file"
+rm ./.env.local
 
 echo "Deploying website"
 if [ ${NOCONFIRM} -eq 1 ]; then
-    sls client deploy --stage ${STAGE} --env ${STAGE} --no-confirm
+    sls client deploy --stage ${STAGE} --env ${ENVFILE} --no-confirm
 else
-    sls client deploy --stage ${STAGE} --env ${STAGE}
+    sls client deploy --stage ${STAGE} --env ${ENVFILE}
 fi
 
 echo "Invalidating CloudFront Distribution"
