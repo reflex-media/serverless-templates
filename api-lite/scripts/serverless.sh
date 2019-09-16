@@ -10,7 +10,7 @@ usage="$(basename "$0") [-f] [-s] [-t] [-h] -- script to deploy serverless funct
 
 where:
     -f      deploy single function
-    -s      deploy to a specific stage/environment (e.g; development, staging, production)
+    -s      deploy to a specific stage/environment (e.g; dev, stage, prod)
     -t      define the type of action to be taken (Optional)
     -h      show this help text"
 
@@ -45,6 +45,30 @@ while getopts "hs:f:t:" OPT ; do
   esac
 done
 
+# Set envfile
+ENVFILE=${STAGE}
+
+# rewrite stage names
+if [ ${STAGE} == "production" ]; then
+    STAGE="prod"
+elif [ ${STAGE} == "prod" ]; then
+    ENVFILE="production"
+elif [ ${STAGE} == "staging" ]; then
+    STAGE="stage"
+elif [ ${STAGE} == "stage" ]; then
+    ENVFILE="staging"
+elif [ ${STAGE} == "development" ]; then
+    STAGE="dev"
+elif [ ${STAGE} == "dev" ]; then
+    ENVFILE="development"
+fi
+
+# Check if local env file exists
+FILE=config/environments/.env.${ENVFILE}.local
+if [ -f "$FILE" ]; then
+    ENVFILE=${ENVFILE}.local
+fi
+
 # color codes
 RED='\033[0;31m';
 GREEN='\033[0;32m';
@@ -64,7 +88,7 @@ NC='\033[0m';
 
 function deploy_func_check ()
 {
-    if [ ${STAGE} == "production" ]; then
+    if [ ${STAGE} == "prod" ]; then
         prompt_confirmation_deploy_function
     else
         deploy_func
@@ -74,7 +98,7 @@ function deploy_func_check ()
 function deploy_func ()
 {
     echo -e "${YELLOW}Deploying ${FUNCTION} to ${STAGE}${NC}"
-    sls deploy -f ${FUNCTION} --stage ${STAGE} --env ${STAGE}
+    sls deploy -f ${FUNCTION} --stage ${STAGE} --env ${ENVFILE}
 }
 
 function prompt_confirmation_deploy_all ()
@@ -104,19 +128,19 @@ function prompt_confirmation_deploy_function ()
 function deploy_full ()
 {
     echo -e "${YELLOW}Deploying service to ${STAGE}${NC}"
-    sls deploy --stage ${STAGE} --env ${STAGE}
+    sls deploy --stage ${STAGE} --env ${ENVFILE}
 }
 
 function invoke_func ()
 {
     echo -e "${YELLOW}Invoking function ${FUNCTION} on ${STAGE}${NC}"
-    sls invoke -f ${FUNCTION} --stage ${STAGE} -l
+    sls invoke -f ${FUNCTION} --stage ${STAGE} --env ${ENVFILE} -l
 }
 
 function log_stream_func ()
 {
     echo -e "${YELLOW}Log Streaming function ${FUNCTION} on ${STAGE}${NC}"
-    sls logs -f ${FUNCTION} --stage ${STAGE} -t
+    sls logs -f ${FUNCTION} --stage ${STAGE} --env ${ENVFILE} -t
 }
 
 ###############################################################################
@@ -126,7 +150,7 @@ function log_stream_func ()
 ###############################################################################
 
 if [ -n "$STAGE" ]; then
-    if [ ${STAGE} == "development" ] || [ ${STAGE} == "staging" ] || [ ${STAGE} == "production" ]; then
+    if [ ${STAGE} == "dev" ] || [ ${STAGE} == "stage" ] || [ ${STAGE} == "prod" ]; then
         if [ ${INVOKE} -eq 1 ]; then
             if [ -n "$FUNCTION" ]; then
                 invoke_func
@@ -154,7 +178,7 @@ if [ -n "$STAGE" ]; then
             fi
         fi
     else
-        echo -e "${RED}Invalid Stage [-s] supplied. Only 'development', 'staging', or 'production' are allowed.${NC}"
+        echo -e "${RED}Invalid Stage [-s] supplied. Only 'dev', 'development', 'stage', 'staging', 'prod', 'production' are allowed.${NC}"
         exit 1;
     fi
 else
