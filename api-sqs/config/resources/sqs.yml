@@ -1,0 +1,19 @@
+Resources:
+  PingQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: ${self:provider.stackName}-PingQueue
+      VisibilityTimeout: 30
+      MessageRetentionPeriod: 3600
+      RedrivePolicy:
+        deadLetterTargetArn:
+          'Fn::GetAtt':
+            - PingQueueDeadLetterQueue
+            - Arn
+        maxReceiveCount: 3
+
+  PingQueueDeadLetterQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: ${self:provider.stackName}-PingQueueDLQ
+      MessageRetentionPeriod: 3600

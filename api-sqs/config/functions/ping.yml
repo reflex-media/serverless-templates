@@ -1,0 +1,35 @@
+ping:
+  handler: ${self:custom.path.app}/handlers/ping.handler
+  description: Ping test
+  timeout: 1
+  reservedConcurrency: 3
+  events:
+    - http:
+        path: ping
+        method: get
+        private: false
+        cors: ${self:custom.http.cors}
+
+pingAuth:
+  handler: ${self:custom.path.app}/handlers/ping.handler
+  description: Ping test with authentication
+  timeout: 1
+  reservedConcurrency: 3
+  events:
+    - http:
+        path: ping/auth
+        method: get
+        private: true
+        cors: ${self:custom.http.cors}
+
+pingQueue:
+  handler: ${self:custom.path.app}/handlers/pingQueue.handler
+  description: Ping queued test
+  timeout: 5
+  reservedConcurrency: 3
+  events:
+    - http:
+        path: ping/queue
+        method: get
+        private: true
+        cors: ${self:custom.http.cors}

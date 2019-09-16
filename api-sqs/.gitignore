@@ -1,0 +1,22 @@
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+
+# Webpack directories
+.webpack
+
+# nyc coverage report
+coverage
+.nyc_output
+
+# yarn error log
+yarn-error.log
+
+# local env
+.env.local
+.env.development.local
+.env.staging.local
+.env.production.local
