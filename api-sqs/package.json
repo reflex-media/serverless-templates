@@ -1,5 +1,5 @@
 {
-  "name": "serverless-templates-api-sqs",
+  "name": "serverless-template-api-sqs",
   "version": "0.1.0",
   "description": "Serverless Framework for api with sqs project",
   "scripts": {

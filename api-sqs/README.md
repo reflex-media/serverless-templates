@@ -75,6 +75,8 @@ Contains serverless configurations.
 **config/environments/**  
 Contains environment-specific configurations. The environment files are used for both deployment and within application code.
 
+You may overwrite env files during a deployment by adding a `.local` suffix e.g; `.env.development.local`. This is useful for when you want to deploy to a specific environment but not wanting to overwrite committed values.
+
 > `.env`: default environment, served as a local example.  
 > `.env.local`: local environment configuration. This should not be committed.  
 > `.env.development`: development environment configuration.  

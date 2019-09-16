@@ -1,5 +1,5 @@
 service:
-  name: serverless-templates-api-sqs
+  name: sls-tpl-api-sqs
 
 plugins:
   - serverless-webpack
