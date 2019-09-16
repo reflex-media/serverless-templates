@@ -73,11 +73,11 @@ NC='\033[0m';
 
 echo -e "${PURPLE}Starting command...${NC}"
 
-echo -e "Configuring website env file"
+echo -e "Updating env file from config/environments/.env.${ENVFILE} to .env.local"
 cp ./config/environments/.env.${ENVFILE} ./.env.local
 
 echo "Bundling website"
 react-scripts build
 
-echo "Remove build env file"
+echo "Removing .env.local"
 rm ./.env.local
