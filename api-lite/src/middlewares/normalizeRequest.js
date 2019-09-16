@@ -1,5 +1,5 @@
-import ValidationError from "Exceptions/ValidationError";
-import { VALIDATION_ERROR_UNKNOWN_PARAMETER } from "Constants/errorCodes";
+import ValidationError from 'Exceptions/ValidationError';
+import { VALIDATION_ERROR_UNKNOWN_PARAMETER } from 'Constants/errorCodes';
 
 export const normalize = (headers, qs, body) => {
   let input = null;
@@ -8,12 +8,12 @@ export const normalize = (headers, qs, body) => {
 
   if (qs !== null) input = qs;
 
-  const contentType = headers["Content-Type"] || headers["content-type"];
+  const contentType = headers['Content-Type'] || headers['content-type'];
 
   if (!contentType) return input;
 
   /* istanbul ignore else */
-  if (contentType.startsWith("application/json")) {
+  if (contentType.startsWith('application/json')) {
     try {
       input = {
         ...input,
@@ -21,7 +21,7 @@ export const normalize = (headers, qs, body) => {
       };
     } catch (err) {
       throw new ValidationError(
-        "Content type defined as JSON but an invalid JSON was provided",
+        'Content type defined as JSON but an invalid JSON was provided',
         VALIDATION_ERROR_UNKNOWN_PARAMETER
       );
     }

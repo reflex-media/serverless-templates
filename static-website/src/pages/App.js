@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import "assets/styles/App.css";
+import 'assets/styles/App.css';
 
-import Home from "./Home";
+import Home from './Home';
 
 function App() {
   return (

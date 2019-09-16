@@ -1,27 +1,27 @@
-import ValidationError from "Exceptions/ValidationError";
+import ValidationError from 'Exceptions/ValidationError';
 import {
   VALIDATION_ERROR_SAMPLE,
   VALIDATION_ERROR_UNKNOWN_PARAMETER,
-} from "Constants/errorCodes";
+} from 'Constants/errorCodes';
 
 const ping = input => {
   return new Promise((resolve, reject) => {
-    if (!input) return resolve("Pong");
+    if (!input) return resolve('Pong');
 
-    if (input["sample-error"] === "message") {
+    if (input['sample-error'] === 'message') {
       // eslint-disable-next-line prefer-promise-reject-errors
-      return reject("Error Message");
+      return reject('Error Message');
     }
 
-    if (input["sample-error"] === "exception") {
+    if (input['sample-error'] === 'exception') {
       return reject(
-        new ValidationError("Error exception", VALIDATION_ERROR_SAMPLE)
+        new ValidationError('Error exception', VALIDATION_ERROR_SAMPLE)
       );
     }
 
     return reject(
       new ValidationError(
-        "Unknown parameter supplied",
+        'Unknown parameter supplied',
         VALIDATION_ERROR_UNKNOWN_PARAMETER
       )
     );

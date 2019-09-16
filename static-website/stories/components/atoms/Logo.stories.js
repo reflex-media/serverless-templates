@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import Logo from "components/atoms/Logo";
+import Logo from 'components/atoms/Logo';
 
 export default {
-  title: "Components|Atoms/Logo",
+  title: 'Components|Atoms/Logo',
 };
 
 export const main = () => <Logo />;

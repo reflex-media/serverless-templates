@@ -1,4 +1,4 @@
-import { VALIDATION_ERROR } from "Constants/errorCodes";
+import { VALIDATION_ERROR } from 'Constants/errorCodes';
 
 export default class ValidationError extends Error {
   constructor(
@@ -8,7 +8,7 @@ export default class ValidationError extends Error {
     extra
   ) {
     super();
-    this.name = "ValidationError";
+    this.name = 'ValidationError';
     this.message = message;
     this.statusCode = httpStatusCode;
     this.code = errorCode;

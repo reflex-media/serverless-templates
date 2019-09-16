@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import HomeHero from "components/molecules/HomeHero";
+import HomeHero from 'components/molecules/HomeHero';
 
 export default {
-  title: "Components|Molecules/HomeHero",
+  title: 'Components|Molecules/HomeHero',
 };
 
 export const main = () => <HomeHero />;

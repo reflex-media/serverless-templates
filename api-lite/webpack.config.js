@@ -1,38 +1,38 @@
-const path = require("path");
+const path = require('path');
 // eslint-disable-next-line import/no-unresolved
-const slsw = require("serverless-webpack");
+const slsw = require('serverless-webpack');
 
 module.exports = {
   entry: slsw.lib.entries,
   output: {
-    libraryTarget: "commonjs",
-    filename: "[name].js",
-    path: path.join(__dirname, ".webpack"),
+    libraryTarget: 'commonjs',
+    filename: '[name].js',
+    path: path.join(__dirname, '.webpack'),
   },
-  mode: "production",
-  target: "node",
+  mode: 'production',
+  target: 'node',
   module: {
     rules: [
       {
         test: /\.js$/, // include .js files
-        enforce: "pre", // preload the jshint loader
+        enforce: 'pre', // preload the jshint loader
         exclude: /node_modules/, // exclude any and all files in the node_modules folder
         include: __dirname,
         use: [
           {
-            loader: "babel-loader",
+            loader: 'babel-loader',
           },
         ],
       },
     ],
   },
-  externals: [{ "aws-sdk": "commonjs aws-sdk" }],
+  externals: [{ 'aws-sdk': 'commonjs aws-sdk' }],
   resolve: {
     alias: {
-      Middlewares: path.resolve(__dirname, "src/middlewares/"),
-      Exceptions: path.resolve(__dirname, "src/exceptions/"),
-      Constants: path.resolve(__dirname, "src/constants/"),
-      Core: path.resolve(__dirname, "src/core/"),
+      Middlewares: path.resolve(__dirname, 'src/middlewares/'),
+      Exceptions: path.resolve(__dirname, 'src/exceptions/'),
+      Constants: path.resolve(__dirname, 'src/constants/'),
+      Core: path.resolve(__dirname, 'src/core/'),
     },
   },
 };

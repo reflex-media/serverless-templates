@@ -1,4 +1,4 @@
-import { app } from "../config";
+import { app } from '../config';
 
 export const responseHandlerResponse = (
   response,
@@ -7,13 +7,13 @@ export const responseHandlerResponse = (
 ) => {
   return {
     headers: {
-      "Access-Control-Allow-Credentials": true,
-      "Access-Control-Allow-Origin": "*",
-      "Cache-Control": "no-cache",
+      'Access-Control-Allow-Credentials': true,
+      'Access-Control-Allow-Origin': '*',
+      'Cache-Control': 'no-cache',
     },
     statusCode,
     body: JSON.stringify({
-      status: "success",
+      status: 'success',
       data: response,
       _meta: app.debug ? event : {},
     }),

@@ -1,10 +1,10 @@
-import React from "react";
-import { shallow } from "enzyme";
+import React from 'react';
+import { shallow } from 'enzyme';
 
-import Logo from "../Logo";
+import Logo from '../Logo';
 
-describe("test Logo component", () => {
-  it("should render correctly", () => {
+describe('test Logo component', () => {
+  it('should render correctly', () => {
     const component = shallow(<Logo />);
     expect(component).toMatchSnapshot();
   });
