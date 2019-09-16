@@ -25,6 +25,14 @@ while getopts "s:nh" OPT ; do
   esac
 done
 
+# Check if local env file exists
+FILE=config/environments/.env.local
+if [ -f "$FILE" ]; then
+  ENVFILE=.env.local
+else 
+  ENVFILE=.env
+fi
+
 # color codes
 RED='\033[0;31m';
 GREEN='\033[0;32m';
@@ -44,8 +52,8 @@ NC='\033[0m';
 
 echo -e "${PURPLE}Starting command...${NC}"
 
-echo -e "Configuring website env file"
-cp ./config/environments/.env.local ./.env.local
+echo -e "Configuring website env file from config/environments/${ENVFILE}"
+cp ./config/environments/${ENVFILE} ./.env.local
 
 echo "Start website"
 react-scripts start
