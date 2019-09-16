@@ -69,7 +69,9 @@ Access local url via browser or Postman (recommended): http://localhost:8181/pin
 Contains serverless configurations.
 
 **config/environments/**  
-Contains environment-specific configurations. The environment files are used for both deployment and within application code.
+Contains environment-specific configurations. The environment files are used for both deployment and within application code. 
+
+You may overwrite env files during a deployment by adding a `.local` suffix e.g; `.env.development.local`. This is useful for when you want to deploy to a specific environment but not wanting to overwrite committed values.
 
 > `.env`: default environment, served as a local example.  
 > `.env.local`: local environment configuration. This should not be committed.  
@@ -230,13 +232,13 @@ This middleware will be executed whenever a successful response is expected to b
 This middleware will be executed whenever an error response is expected to be returned. This middleware executes _after_ the request is processed and _before_ the response is returned.
 
 ```js
-import middy from "middy";
-import normalizeRequest from "Middlewares/normalizeRequest";
-import responseHandler from "Middlewares/responseHandler";
-import errorHandler from "Middlewares/errorHandler";
+import middy from 'middy';
+import normalizeRequest from 'Middlewares/normalizeRequest';
+import responseHandler from 'Middlewares/responseHandler';
+import errorHandler from 'Middlewares/errorHandler';
 
 const originalHandler = async () => {
-  return await new Promise(resolve => resolve("Pong"));
+  return await new Promise(resolve => resolve('Pong'));
 };
 
 export const handler = middy(originalHandler);
@@ -260,11 +262,11 @@ You can write your own custom middleware with [Middy](https://www.npmjs.com/pack
 It is recommended to always throw an Error class as an exception instead of returning just an error message. You may create your own Error Class within the `src/exceptions/` directory.
 
 ```js
-import ValidationError from "Errors/ValidationError";
+import ValidationError from 'Errors/ValidationError';
 
 const someFunction = () => {
   throw new ValidationError(
-    "Content type defined as JSON but an invalid JSON was provided",
+    'Content type defined as JSON but an invalid JSON was provided',
     40001002,
     400
   );

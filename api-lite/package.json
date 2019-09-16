@@ -1,5 +1,5 @@
 {
-  "name": "serverless-templates-api-lite",
+  "name": "serverless-template-api-lite",
   "version": "0.1.0",
   "description": "Serverless Framework for lightweight api project",
   "scripts": {

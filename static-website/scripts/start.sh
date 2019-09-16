@@ -45,7 +45,7 @@ NC='\033[0m';
 echo -e "${PURPLE}Starting command...${NC}"
 
 echo -e "Configuring website env file"
-cp ./config/environments/.env.local ./.env.development.local
+cp ./config/environments/.env.local ./.env.local
 
 echo "Start website"
 react-scripts start
