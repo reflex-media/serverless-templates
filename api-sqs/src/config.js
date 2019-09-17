@@ -3,7 +3,7 @@ export const app = {
   debug: process.env.APP_DEBUG === 'true',
 };
 
-const awsSQSPingQueueName = `sls-tpl-api-sqs-${app.env}-PingQueue`;
+const awsSQSPingQueueName = `sls-tpl-api-sqs-${app.env}-pingQueue`;
 
 export const aws = {
   sqs: {

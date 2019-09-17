@@ -104,7 +104,7 @@ function deploy_func ()
 function prompt_confirmation_deploy_all ()
 {
     while true; do
-        read -p "Confirm deploy service to [${STAGE}]? [Y|N] " yn
+        read -p "Confirm deploy service to ${STAGE} with .env.${ENVFILE}? [Y|N] " yn
         case ${yn} in
             [Yy] | yes | Yes | YES ) deploy_full; break;;
             [Nn] | no | No | NO ) echo -e "${YELLOW}Cancelled deploying service to [${STAGE}]${NC}"; exit;;
@@ -116,7 +116,7 @@ function prompt_confirmation_deploy_all ()
 function prompt_confirmation_deploy_function ()
 {
     while true; do
-        read -p "Confirm deploy function ${FUNCTION} to [${STAGE}]? [Y|N] " yn
+        read -p "Confirm deploy function ${FUNCTION} to ${STAGE} with .env.${ENVFILE}? [Y|N] " yn
         case ${yn} in
             [Yy] | yes | Yes | YES ) deploy_func; break;;
             [Nn] | no | No | NO ) echo -e "${YELLOW}Cancelled deploying function ${FUNCTION} to [${STAGE}]${NC}"; exit;;

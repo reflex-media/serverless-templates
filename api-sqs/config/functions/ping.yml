@@ -2,7 +2,7 @@ ping:
   handler: ${self:custom.path.app}/handlers/ping.handler
   description: Ping test
   timeout: 1
-  reservedConcurrency: 3
+  reservedConcurrency: 1
   events:
     - http:
         path: ping
@@ -14,7 +14,7 @@ pingAuth:
   handler: ${self:custom.path.app}/handlers/ping.handler
   description: Ping test with authentication
   timeout: 1
-  reservedConcurrency: 3
+  reservedConcurrency: 1
   events:
     - http:
         path: ping/auth
@@ -25,8 +25,9 @@ pingAuth:
 pingQueue:
   handler: ${self:custom.path.app}/handlers/pingQueue.handler
   description: Ping queued test
-  timeout: 5
-  reservedConcurrency: 3
+  memorySize: 192
+  timeout: 3
+  reservedConcurrency: 1
   events:
     - http:
         path: ping/queue

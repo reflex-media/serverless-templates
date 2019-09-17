@@ -9,6 +9,9 @@ plugins:
   - serverless-plugin-log-retention
   - serverless-dotenv-plugin
 
+package:
+  individually: true
+
 provider:
   name: aws
   runtime: nodejs10.x
