@@ -4,7 +4,7 @@ Resources:
     Properties:
       QueueName: ${self:provider.stackName}-pingQueue
       VisibilityTimeout: 30
-      MessageRetentionPeriod: 3600
+      MessageRetentionPeriod: 43200 # 12h
       RedrivePolicy:
         deadLetterTargetArn:
           'Fn::GetAtt':
@@ -16,4 +16,4 @@ Resources:
     Type: AWS::SQS::Queue
     Properties:
       QueueName: ${self:provider.stackName}-pingQueueDLQ
-      MessageRetentionPeriod: 3600
+      MessageRetentionPeriod: 43200 # 12h

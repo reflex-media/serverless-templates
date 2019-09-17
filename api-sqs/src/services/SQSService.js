@@ -9,8 +9,20 @@ export default class SQSService {
       region: null,
     }
   ) {
+    let options = {};
+
+    if (opts.accessKeyId !== null) {
+      options = { ...options, accessKeyId: opts.accessKeyId };
+    }
+    if (opts.secretAccessKey !== null) {
+      options = { ...options, secretAccessKey: opts.secretAccessKey };
+    }
+    if (opts.region !== null) {
+      options = { ...options, region: opts.region };
+    }
+
     this.sqsClient = new SQS({
-      ...opts,
+      ...{ options },
     });
   }
 
