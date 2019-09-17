@@ -12,15 +12,21 @@ describe('test normalizeRecords middleware', () => {
   });
 
   it('test with valid SQS records', () => {
-    const data = normalize({
-      Records: [
-        {
-          messageId: 'messageId',
-          receiptHandle: 'receiptHandle',
-          body: '{"data":{"testQueueKey":"testQueueValue"}}',
+    const data = normalize([
+      {
+        messageId: 'messageId',
+        receiptHandle: 'receiptHandle',
+        body: '{"data":{"testQueueKey":"testQueueValue"}}',
+      },
+    ]);
+    expect(data).toMatchObject([
+      {
+        messageId: 'messageId',
+        receiptHandle: 'receiptHandle',
+        data: {
+          testQueueKey: 'testQueueValue',
         },
-      ],
-    });
-    expect(data).toHaveProperty('testQueueKey', 'testQueueValue');
+      },
+    ]);
   });
 });

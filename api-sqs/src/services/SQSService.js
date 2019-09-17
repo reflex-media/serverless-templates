@@ -11,18 +11,18 @@ export default class SQSService {
   ) {
     let options = {};
 
-    if (opts.accessKeyId !== null) {
+    if (opts.accessKeyId !== null && opts.accessKeyId !== undefined) {
       options = { ...options, accessKeyId: opts.accessKeyId };
     }
-    if (opts.secretAccessKey !== null) {
+    if (opts.secretAccessKey !== null && opts.secretAccessKey !== undefined) {
       options = { ...options, secretAccessKey: opts.secretAccessKey };
     }
-    if (opts.region !== null) {
+    if (opts.region !== null && opts.region !== undefined) {
       options = { ...options, region: opts.region };
     }
 
     this.sqsClient = new SQS({
-      ...{ options },
+      ...{ ...options },
     });
   }
 

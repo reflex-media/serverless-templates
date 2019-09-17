@@ -1,5 +1,6 @@
 export const normalize = records => {
-  if (!records || records === null) return null;
+  if (!records || records === null || Object.keys(records).length === 0)
+    return null;
 
   return Object.values(records).map(record => ({
     messageId: record.messageId,
