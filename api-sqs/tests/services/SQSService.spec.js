@@ -7,4 +7,11 @@ describe('test SQSService', () => {
       sqsInstance.enqueue({ someData: 'someValue' }, 'pingQueue')
     ).resolves.toHaveProperty('MessageId', 'MessageId');
   });
+
+  it('should set custom access key when instantiated', () => {
+    const sqsInstance = new SQSService({ accessKeyId: 'accessKeyId' });
+    return expect(
+      sqsInstance.enqueue({ someData: 'someValue' }, 'pingQueue')
+    ).resolves.toHaveProperty('MessageId', 'MessageId');
+  });
 });

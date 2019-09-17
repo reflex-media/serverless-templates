@@ -3,7 +3,7 @@ Resources:
     Type: AWS::SQS::Queue
     Properties:
       QueueName: ${self:provider.stackName}-pingQueue
-      VisibilityTimeout: 30
+      VisibilityTimeout: 60
       MessageRetentionPeriod: 43200 # 12h
       RedrivePolicy:
         deadLetterTargetArn:
