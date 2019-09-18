@@ -222,7 +222,7 @@ Middlewares should be written in the `src/middlewares/` directory.
 
 This template contains 3 middlewares.
 
-**`normalizeHandler.js`**  
+**`normalizeRequest.js`**  
 This middleware will normalize query string parameters and/or json body in the request into a common `handler.event.input`. This middleware executes _before_ the handler is called.
 
 **`responseHandler.js`**  
