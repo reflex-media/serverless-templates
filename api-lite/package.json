@@ -15,7 +15,8 @@
   },
   "dependencies": {
     "middy": "^0.29.0",
-    "serverless-api-compression": "^1.0.1"
+    "serverless-api-compression": "^1.0.1",
+    "slsrun": "git+https://github.com/reflex-media/slsrun.git"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
