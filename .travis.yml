@@ -4,7 +4,7 @@ node_js:
 branches:
   only:
     - master
-    - static-website
+    - develop
 cache:
   directories:
     - node_modules
@@ -14,6 +14,11 @@ matrix:
     - name: "api-lite test suite"
       install:
         - cd api-lite && yarn install
+      script:
+        - yarn coveralls
+    - name: "api-sqs test suite"
+      install:
+        - cd api-sqs && yarn install
       script:
         - yarn coveralls
     - name: "static-website test suite"

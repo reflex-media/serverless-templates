@@ -1,5 +1,8 @@
 # Serverless Templates
 
+[![Build Status](https://travis-ci.org/reflex-media/serverless-templates.svg?branch=master)](https://travis-ci.org/reflex-media/serverless-templates)
+[![Coverage Status](https://coveralls.io/repos/github/reflex-media/serverless-templates/badge.svg?branch=master)](https://coveralls.io/github/reflex-media/serverless-templates?branch=master)
+
 This repository contains a set of serverless templates to bootstrap your serverless projects.
 
 **NOTE:** This is not an introduction to the Serverless Framework. You would need to know how Serverless Framework works prior to using any of these templates.
@@ -40,3 +43,5 @@ Access local url via browser or Postman (recommended): http://localhost:8181/pin
 See the available templates for more in-depth documentation and usage.
 
 - [api-lite](https://github.com/mosufy/serverless-templates/tree/master/api-lite)
+- [api-sqs](https://github.com/mosufy/serverless-templates/tree/master/api-sqs)
+- [static-website](https://github.com/mosufy/serverless-templates/tree/master/static-website)
