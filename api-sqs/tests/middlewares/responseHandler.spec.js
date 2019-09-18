@@ -47,5 +47,8 @@ describe('test responseHandler middleware', () => {
     expect(dataBody).toHaveProperty('status', 'success');
     expect(dataBody).toHaveProperty('data', 'Some message');
     expect(dataBody).toHaveProperty('_meta', {});
+
+    // Set it back to true
+    app.debug = true;
   });
 });

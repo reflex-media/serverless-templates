@@ -235,6 +235,24 @@ Send a ping request queued to SQS as a failed job.
    - Message will be retried for a maximum of 3 tries (as per `maxReceiveCount`)
    - Should a message continue to fail after the max retries, it will be put into the `pingQueueDLQ` queue.
 
+### Connecting To Separate SQS Instance
+
+To connect to a different SQS instance, you may override the config by updating these in the environments file.
+
+```bash
+# Enable/disable override
+AWS_SQS_OPTIONS_OVERRIDE=true
+
+# Set IAM access key with SQS access
+AWS_SQS_OPTIONS_ACCESS_KEY_ID=
+
+# Set IAM secret key
+AWS_SQS_OPTIONS_SECRET_ACCESS_KEY=
+
+# Set SQS region to connect to
+AWS_SQS_OPTIONS_REGION=
+```
+
 ## Middlewares
 
 Middlewares can be executed before or after a request. This will be useful for cases where an action is required prior to reaching the handler, or when an action is required to execute prior to the returning of the response.

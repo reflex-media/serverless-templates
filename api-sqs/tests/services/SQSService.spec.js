@@ -71,4 +71,35 @@ describe('test SQSService', () => {
       },
     });
   });
+
+  it('should enqueue with override options', () => {
+    aws.sqs.options.override = true;
+    aws.sqs.options.accessKeyId = 'accessKeyId';
+    aws.sqs.options.secretAccessKey = 'secretAccessKey';
+    aws.sqs.options.region = 'region';
+
+    const sqsInstance = new SQSService();
+    return expect(
+      sqsInstance.enqueue({ someData: 'someValue' }, 'pingQueue')
+    ).resolves.toMatchObject({
+      MessageId: 'MessageId',
+      mocked: {
+        opts: {
+          accessKeyId: 'accessKeyId',
+          secretAccessKey: 'secretAccessKey',
+          region: 'region',
+        },
+        params: {
+          MessageBody: '{"someData":"someValue"}',
+          QueueUrl: `${aws.sqs.pingQueue.url}`,
+        },
+      },
+    });
+
+    // @FIXME figure a way to revert the override above
+    // aws.sqs.options.override = false;
+    // aws.sqs.options.accessKeyId = '';
+    // aws.sqs.options.secretAccessKey = '';
+    // aws.sqs.options.region = '';
+  });
 });
