@@ -1,0 +1,94 @@
+{
+  "name": "serverless-template-api-sqs",
+  "version": "0.1.0",
+  "description": "Serverless Framework for api with sqs project",
+  "scripts": {
+    "start": "sls offline start --stage local --env local",
+    "server": "sls offline start --stage local --env local",
+    "deploy": "./scripts/serverless.sh",
+    "invoke": "./scripts/serverless.sh -t invoke",
+    "logs": "./scripts/serverless.sh -t logs",
+    "pretest": "eslint --ignore-path .gitignore .",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls"
+  },
+  "dependencies": {
+    "middy": "^0.29.0",
+    "serverless-api-compression": "^1.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.0",
+    "@babel/polyfill": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "aws-sdk": "^2.529.0",
+    "babel-loader": "^8.0.0",
+    "babel-plugin-webpack-aliases": "^1.1.3",
+    "coveralls": "^3.0.6",
+    "eslint": "^6.3.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-import-resolver-webpack": "^0.11.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.17.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "husky": ">=1",
+    "jest": "^24.9.0",
+    "lint-staged": ">=8",
+    "path": "^0.12.7",
+    "prettier": "^1.18.2",
+    "serverless-dotenv-plugin": "^2.1.1",
+    "serverless-offline": "^5.10.1",
+    "serverless-plugin-log-retention": "^2.0.0",
+    "serverless-plugin-optimize": "^4.1.0-rc.1",
+    "serverless-webpack": "^5.3.1",
+    "source-map": "^0.7.3",
+    "webpack": "^4.35.2"
+  },
+  "author": "Sufiyan Rahmat <mosufy@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "jest": {
+    "verbose": true,
+    "testMatch": [
+      "**/tests/*.spec.js",
+      "**/tests/**/*.spec.js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/config.js",
+      "!src/handlers/**/*.js"
+    ],
+    "coverageReporters": [
+      "html",
+      "text",
+      "lcov"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    },
+    "setupFiles": [
+      "./tests/setupTest.js"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}

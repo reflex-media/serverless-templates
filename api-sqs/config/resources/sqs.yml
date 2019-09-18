@@ -1,0 +1,19 @@
+Resources:
+  PingQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: ${self:provider.stackName}-pingQueue
+      VisibilityTimeout: 300 # 5min delay before next retry
+      MessageRetentionPeriod: 43200 # 12h ttl in the queue
+      RedrivePolicy:
+        deadLetterTargetArn:
+          'Fn::GetAtt':
+            - PingQueueDeadLetterQueue
+            - Arn
+        maxReceiveCount: 3 # max tries before pushing to DLQ
+
+  PingQueueDeadLetterQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: ${self:provider.stackName}-pingQueueDLQ
+      MessageRetentionPeriod: 43200 # 12h ttl in the queue

@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "allowSyntheticDefaultImports": false,
+    "baseUrl": "./",
+    "paths": {
+      "Middlewares/*": ["src/middlewares/*"],
+      "Exceptions/*": ["src/exceptions/*"],
+      "Services/*": ["src/services/*"],
+      "Constants/*": ["src/constants/*"],
+      "Core/*": ["src/core/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist", "scripts", "environments"]
+}

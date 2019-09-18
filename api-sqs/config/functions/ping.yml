@@ -1,0 +1,45 @@
+ping:
+  handler: ${self:custom.path.app}/handlers/ping.handler
+  description: Ping test
+  timeout: 1
+  reservedConcurrency: 1
+  events:
+    - http:
+        path: ping
+        method: get
+        private: false
+        cors: ${self:custom.http.cors}
+
+pingAuth:
+  handler: ${self:custom.path.app}/handlers/ping.handler
+  description: Ping test with authentication
+  timeout: 1
+  reservedConcurrency: 1
+  events:
+    - http:
+        path: ping/auth
+        method: get
+        private: true
+        cors: ${self:custom.http.cors}
+
+pingQueue:
+  handler: ${self:custom.path.app}/handlers/pingQueue.handler
+  description: Ping queued test
+  memorySize: 192
+  timeout: 3
+  reservedConcurrency: 1
+  events:
+    - http:
+        path: ping/queue
+        method: get
+        private: true
+        cors: ${self:custom.http.cors}
+
+pingQueueProcessor:
+  handler: ${self:custom.path.app}/handlers/pingQueueProcessor.handler
+  description: Process queued ping
+  memorySize: 128
+  timeout: 3
+  reservedConcurrency: 3
+  events:
+    - sqs: arn:aws:sqs:${self:provider.region}:${env:AWS_ACCOUNT_ID}:${self:provider.stackName}-pingQueue
