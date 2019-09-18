@@ -10,7 +10,6 @@ Bootstrap your next API serverless project with Simple Queue Service (SQS). Reco
 - API Gateway
 - Lambda
 - SQS
-- Cloudwatch Events
 
 **NOTE:** This is not an introduction to the Serverless Framework. You would already need to know how Serverless Framework works prior to using of this template.
 
@@ -62,6 +61,7 @@ Access local url via browser or Postman (recommended): http://localhost:8181/pin
 |   ├── handlers
 |   ├── middlewares
 |   |   ├── errorHandler.js
+|   |   ├── normalizeRecords.js
 |   |   ├── normalizeRequest.js
 |   |   └── responseHandler.js
 |   ├── services
@@ -214,6 +214,27 @@ Returns the request with an "error message" response type.
 **`/ping?sample-error=exception`**  
 Returns the request with an "error class" response type.
 
+**`/ping/queue`**  
+Send a ping request queued to SQS.  
+**Note**: Set `x-api-key` in your request header for a valid request.
+
+**`/ping/queue?failed-queue`**  
+Send a ping request queued to SQS as a failed job.  
+**Note**: Set `x-api-key` in your request header for a valid request.
+
+## How It Works
+
+1. Client sends a GET request to `/ping/queue`
+2. `pingQueue` lambda function accepts the request and sends an SQS message
+3. Message is put into the `pingQueue`
+4. SQS queue receives the message and fires a `pingQueueProcessor` lambda function
+5. Based on the default configurations:
+   - Should no error occur, message will be deleted from the queue
+   - Should an error occurr, message will be put in-flight for 5min (as per `VisibilityTimeout` set)
+   - Message will be made available on expiry of `VisibilityTimeout`
+   - Message will be retried for a maximum of 3 tries (as per `maxReceiveCount`)
+   - Should a message continue to fail after the max retries, it will be put into the `pingQueueDLQ` queue.
+
 ## Middlewares
 
 Middlewares can be executed before or after a request. This will be useful for cases where an action is required prior to reaching the handler, or when an action is required to execute prior to the returning of the response.
@@ -226,7 +247,10 @@ Middlewares should be written in the `src/middlewares/` directory.
 
 This template contains 3 middlewares.
 
-**`normalizeHandler.js`**  
+**`normalizeRecords.js`**  
+This middleware will normalize records coming from sqs message event. The `Records` object in the `handler.event` will not be normalized into `handler.event.collection`. This middleware executes _before_ the handler is called.
+
+**`normalizeRequest.js`**  
 This middleware will normalize query string parameters and/or json body in the request into a common `handler.event.input`. This middleware executes _before_ the handler is called.
 
 **`responseHandler.js`**  
@@ -236,24 +260,19 @@ This middleware will be executed whenever a successful response is expected to b
 This middleware will be executed whenever an error response is expected to be returned. This middleware executes _after_ the request is processed and _before_ the response is returned.
 
 ```js
-import middy from "middy";
-import normalizeRequest from "Middlewares/normalizeRequest";
-import responseHandler from "Middlewares/responseHandler";
-import errorHandler from "Middlewares/errorHandler";
+import middy from 'middy';
+import normalizeResponse from 'Middlewares/normalizeResponse';
 
-const originalHandler = async () => {
-  return await new Promise(resolve => resolve("Pong"));
+const originalHandler = (event) => {
+  const data = event.collection;
 };
 
 export const handler = middy(originalHandler);
 
-handler
-  .use(normalizeRequest())
-  .use(responseHandler())
-  .use(errorHandler());
+handler.use(normalizeResponse());
 ```
 
-Refer to `src/handlers/ping.js` for usage.
+Refer to `src/handlers/pingQueueProcessor.js` for usage.
 
 You may also import other ready-made middlewares from the [Middy repository](https://www.npmjs.com/package/middy#available-middlewares).
 
@@ -266,11 +285,11 @@ You can write your own custom middleware with [Middy](https://www.npmjs.com/pack
 It is recommended to always throw an Error class as an exception instead of returning just an error message. You may create your own Error Class within the `src/exceptions/` directory.
 
 ```js
-import ValidationError from "Errors/ValidationError";
+import ValidationError from 'Errors/ValidationError';
 
 const someFunction = () => {
   throw new ValidationError(
-    "Content type defined as JSON but an invalid JSON was provided",
+    'Content type defined as JSON but an invalid JSON was provided',
     40001002,
     400
   );
