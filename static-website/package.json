@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Serverless Framework for static website",
   "scripts": {
-    "start": "./scripts/start.sh",
-    "build": "./scripts/build.sh",
-    "deploy": "./scripts/serverless.sh",
+    "start": "slsboot-startweb",
+    "build": "slsboot-buildweb",
+    "deploy": "slsboot-scripts",
     "pretest": "eslint --ignore-path .gitignore .",
     "test": "react-scripts test",
     "coverage": "yarn test --coverage --watchAll false",
@@ -40,6 +40,7 @@
     "prettier": "^1.18.2",
     "serverless-finch": "^2.4.3",
     "serverless-webpack": "^5.3.1",
+    "slsboot": "git+https://github.com/reflex-media/slsboot.git",
     "webpack": "4.39.1"
   },
   "jest": {

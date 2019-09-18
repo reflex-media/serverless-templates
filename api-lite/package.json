@@ -5,9 +5,9 @@
   "scripts": {
     "start": "sls offline start --stage local --env local",
     "server": "sls offline start --stage local --env local",
-    "deploy": "./scripts/serverless.sh",
-    "invoke": "./scripts/serverless.sh -t invoke",
-    "logs": "./scripts/serverless.sh -t logs",
+    "deploy": "slsboot-scripts",
+    "invoke": "slsboot-scripts -t invoke",
+    "logs": "slsboot-scripts -t logs",
     "pretest": "eslint --ignore-path .gitignore .",
     "test": "jest",
     "coverage": "jest --coverage",
@@ -44,6 +44,7 @@
     "serverless-plugin-log-retention": "^2.0.0",
     "serverless-plugin-optimize": "^4.1.0-rc.1",
     "serverless-webpack": "^5.3.1",
+    "slsboot": "git+https://github.com/reflex-media/slsboot.git",
     "source-map": "^0.7.3",
     "webpack": "^4.35.2"
   },
