@@ -3,8 +3,7 @@ export const normalize = records => {
     return null;
 
   return Object.values(records).map(record => ({
-    messageId: record.messageId,
-    receiptHandle: record.receiptHandle,
+    ...record,
     ...JSON.parse(record.body),
   }));
 };
