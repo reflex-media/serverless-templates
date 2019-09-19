@@ -1,6 +1,6 @@
 import middy from 'middy';
+import { normalizeHttpRequest } from 'slsrun';
 
-import normalizeRequest from 'Middlewares/normalizeRequest';
 import errorHandler from 'Middlewares/errorHandler';
 import responseHandler from 'Middlewares/responseHandler';
 
@@ -14,6 +14,6 @@ const originalHandler = event => {
 export const handler = middy(originalHandler);
 
 handler
-  .use(normalizeRequest())
+  .use(normalizeHttpRequest())
   .use(responseHandler())
   .use(errorHandler());
