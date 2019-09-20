@@ -7561,7 +7561,7 @@ slice-ansi@^2.1.0:
 
 "slsrun@git+https://github.com/reflex-media/slsrun.git":
   version "0.1.0"
-  resolved "git+https://github.com/reflex-media/slsrun.git#e6c5ea0089cb7b7dadbf10d08f825d308defd436"
+  resolved "git+https://github.com/reflex-media/slsrun.git#1cbdcba72c40cfcc524af000ada5dcaac304e334"
 
 snapdragon-node@^2.0.1:
   version "2.1.1"

@@ -1,5 +1,5 @@
 import pingQueueProcessor from 'Core/pingQueueProcessor';
-import ValidationError from 'Exceptions/ValidationError';
+import ErrorException from 'Exceptions/ErrorException';
 
 describe('test pingQueueProcessor core', () => {
   it('pingQueueProcessor request without any input data should complete', () => {
@@ -54,6 +54,6 @@ describe('test pingQueueProcessor core', () => {
           },
         },
       ])
-    ).toThrow(ValidationError);
+    ).toThrow(ErrorException);
   });
 });

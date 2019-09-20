@@ -1,19 +1,14 @@
 import middy from 'middy';
-import { normalizeHttpRequest } from 'slsrun';
-
-import errorHandler from 'Middlewares/errorHandler';
-import responseHandler from 'Middlewares/responseHandler';
+import { http } from 'slsrun/middlewares';
 
 import ping from 'Core/ping';
+import { app } from '../config';
 
-const originalHandler = async event => {
-  await ping(event.input);
+const originalHandler = event => {
+  return ping(event.input);
 };
 
 // eslint-disable-next-line import/prefer-default-export
 export const handler = middy(originalHandler);
 
-handler
-  .use(normalizeHttpRequest())
-  .use(responseHandler())
-  .use(errorHandler());
+handler.use(http({ debugMode: app.debug }));
