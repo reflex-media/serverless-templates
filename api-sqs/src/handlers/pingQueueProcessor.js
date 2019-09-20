@@ -1,6 +1,6 @@
 import middy from 'middy';
+import { normalizeSQSMessage } from 'slsrun/middlewares';
 
-import normalizeRecords from 'Middlewares/normalizeRecords';
 import pingQueueProcessor from 'Core/pingQueueProcessor';
 
 const originalHandler = event => {
@@ -10,4 +10,4 @@ const originalHandler = event => {
 // eslint-disable-next-line import/prefer-default-export
 export const handler = middy(originalHandler);
 
-handler.use(normalizeRecords());
+handler.use(normalizeSQSMessage());
