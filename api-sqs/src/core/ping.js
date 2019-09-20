@@ -1,8 +1,5 @@
-import ValidationError from 'Exceptions/ValidationError';
-import {
-  VALIDATION_ERROR_SAMPLE,
-  VALIDATION_ERROR_UNKNOWN_PARAMETER,
-} from 'Constants/errorCodes';
+import ErrorException from 'Exceptions/ErrorException';
+import { ERROR_SAMPLE, ERROR_UNKNOWN_PARAMETER } from 'Constants/errorCodes';
 
 const ping = input => {
   return new Promise((resolve, reject) => {
@@ -14,16 +11,11 @@ const ping = input => {
     }
 
     if (input['sample-error'] === 'exception') {
-      return reject(
-        new ValidationError('Error exception', VALIDATION_ERROR_SAMPLE)
-      );
+      return reject(new ErrorException('Error exception', ERROR_SAMPLE));
     }
 
     return reject(
-      new ValidationError(
-        'Unknown parameter supplied',
-        VALIDATION_ERROR_UNKNOWN_PARAMETER
-      )
+      new ErrorException('Unknown parameter supplied', ERROR_UNKNOWN_PARAMETER)
     );
   });
 };

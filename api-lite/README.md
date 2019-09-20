@@ -50,7 +50,6 @@ Access local url via browser or Postman (recommended): http://localhost:8181/pin
 |   ├── functions
 |   ├── resources
 |   └── utils
-├── scripts
 ├── src
 |   ├── constants
 |   ├── core
@@ -87,9 +86,6 @@ Serverless resources should be configured here.
 
 **config/utils/**  
 Additional Serverless configs where required.
-
-**scripts/**  
-Contains Serverless deployment/build scripts.
 
 **src/**  
 Main source code for your application.

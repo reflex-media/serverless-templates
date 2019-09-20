@@ -48,7 +48,6 @@ Access local url via browser: http://localhost:3030
 |       ├── .env.staging
 |       └── .env.production
 ├── public
-├── scripts
 └── src
     ├── assets
     |   ├── img
@@ -82,9 +81,6 @@ You may overwrite env files during a deployment by adding a `.local` suffix e.g;
 
 **public/**  
 Public folder for static website. Contains the `index.html`.
-
-**scripts/**  
-Contains Serverless deployment/build scripts.
 
 **src/**  
 Main source code for your application.

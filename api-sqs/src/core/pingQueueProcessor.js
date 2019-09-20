@@ -1,4 +1,4 @@
-import ValidationError from 'Exceptions/ValidationError';
+import ErrorException from 'Exceptions/ErrorException';
 import { PING_QUEUE_PROCESSOR_SAMPLE_ERROR } from 'Constants/errorCodes';
 
 const pingQueueProcessor = collection => {
@@ -7,7 +7,7 @@ const pingQueueProcessor = collection => {
 
   if (collection[0].data['failed-queue'] === undefined) return collection;
 
-  throw new ValidationError(
+  throw new ErrorException(
     'Sample processed queue error',
     PING_QUEUE_PROCESSOR_SAMPLE_ERROR,
     400
