@@ -1,7 +1,12 @@
-# Serverless Templates
+# ⛔️ DEPRECATED
 
-[![Build Status](https://travis-ci.org/reflex-media/serverless-templates.svg?branch=master)](https://travis-ci.org/reflex-media/serverless-templates)
-[![Coverage Status](https://coveralls.io/repos/github/reflex-media/serverless-templates/badge.svg?branch=master)](https://coveralls.io/github/reflex-media/serverless-templates?branch=master)
+### This repository is no longer supported, please consider using [Lesgo! Framework](https://reflex-media.github.io/lesgo-docs) instead.
+
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
+---
+
+# Serverless Templates
 
 This repository contains a set of serverless templates to bootstrap your serverless projects.
 
